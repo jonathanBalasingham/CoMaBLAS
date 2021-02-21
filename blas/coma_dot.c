@@ -3,6 +3,7 @@
 //
 
 #include "coma_dot.h"
+#include <stdio.h>
 
 float sdot(unsigned int n, float *sx, int incx, float *sy, int incy) {
     float stemp = 0.0, sdot = 0.0;
@@ -14,7 +15,7 @@ float sdot(unsigned int n, float *sx, int incx, float *sy, int incy) {
     if (incx == 1 && incy == 1) {
         m = n % 5;
         if (m != 0){
-            for (int j = 0; j < m - 1; ++j) {
+            for (int j = 0; j < m; ++j) {
                 stemp += sx[j] * sy[j];
             }
 
@@ -25,7 +26,7 @@ float sdot(unsigned int n, float *sx, int incx, float *sy, int incy) {
         }
         //mp1 = m + 1; unecessary since indexed at 0
         for (int j = m; j < n; j += 5) {
-            stemp += sx[j]*sy[j] + sx[j+1]*sy[i+1] + sx[j+2]*sy[j+2] + sx[j+3]*sy[j+3] + sx[j+4]*sy[j+4];
+            stemp += sx[j]*sy[j] + sx[j+1]*sy[j+1] + sx[j+2]*sy[j+2] + sx[j+3]*sy[j+3] + sx[j+4]*sy[j+4];
         }
 
     } else {
@@ -57,7 +58,7 @@ double ddot(int n, const double *dx, int incx, const double *dy, int incy) {
     if (incx == 1 && incy == 1) {
         m = n % 5;
         if (m != 0){
-            for (int j = 0; j < m - 1; ++j) {
+            for (int j = 0; j < m; ++j) {
                 temp += dx[j] * dy[j];
             }
 
@@ -68,7 +69,7 @@ double ddot(int n, const double *dx, int incx, const double *dy, int incy) {
         }
         //mp1 = m + 1; unecessary since indexed at 0
         for (int j = m; j < n; j += 5) {
-            temp += dx[j]*dy[j] + dx[j+1]*dy[i+1] + dx[j+2]*dy[j+2] + dx[j+3]*dy[j+3] + dx[j+4]*dy[j+4];
+            temp += dx[j]*dy[j] + dx[j+1]*dy[j+1] + dx[j+2]*dy[j+2] + dx[j+3]*dy[j+3] + dx[j+4]*dy[j+4];
         }
 
     } else {
