@@ -48,7 +48,7 @@ float sdot(unsigned int n, float *sx, int incx, float *sy, int incy) {
     return sdot;
 }
 
-double ddot(int n, const double *dx, int incx, const double *dy, int incy) {
+double ddot(unsigned int n, const double *dx, int incx, const double *dy, int incy) {
     double temp = 0, ddot = 0;
     int i,ix,iy,m,mp1;
 
@@ -91,10 +91,61 @@ double ddot(int n, const double *dx, int incx, const double *dy, int incy) {
     return ddot;
 }
 
-complex float cdotu(int n, complex float *cx, int incx, complex float *cy, int incy) {
-    return 0;
+complex float cdotu(unsigned int n, complex float *cx, int incx, complex float *cy, int incy) {
+    complex float temp, dotu;
+    int ix, iy;
+
+    temp = 0.0 + 0.0i, dotu = 0.0 + 0.0i;
+    if (n == 0)
+        return dotu;
+
+    if (incx == 1 && incy == 1){
+        for (int i = 0; i < n; ++i) {
+            temp += cx[i] * cy[i];
+        }
+    } else {
+        ix = 1, iy = 1;
+        if (incx < 0)
+            ix = (-1*n+1) * incx;
+        if (incy < 0)
+            iy = (-1*n+1) * incy;
+
+        for (int j = 0; j < n; ++j) {
+            temp += cx[ix] * cy[iy];
+            ix += incx;
+            iy += incy;
+        }
+    }
+
+    dotu = temp;
+    return dotu;
 }
 
-complex double zdotu(int n, complex double *zx, int incx, complex double *zy, int incy) {
-    return 0;
-}
+complex double zdotu(unsigned int n, complex double *zx, int incx, complex double *zy, int incy) {
+    complex double temp, dotu;
+    int ix, iy;
+
+    temp = 0.0 + 0.0i, dotu = 0.0 + 0.0i;
+    if (n == 0)
+        return dotu;
+
+    if (incx == 1 && incy == 1){
+        for (int i = 0; i < n; ++i) {
+            temp += zx[i] * zy[i];
+        }
+    } else {
+        ix = 1, iy = 1;
+        if (incx < 0)
+            ix = (-1*n+1) * incx;
+        if (incy < 0)
+            iy = (-1*n+1) * incy;
+
+        for (int j = 0; j < n; ++j) {
+            temp += zx[ix] * zy[iy];
+            ix += incx;
+            iy += incy;
+        }
+    }
+
+    dotu = temp;
+    return dotu;}
