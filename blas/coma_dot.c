@@ -91,7 +91,7 @@ double ddot(unsigned int n, const double *dx, int incx, const double *dy, int in
     return ddot;
 }
 
-complex float cdotu(unsigned int n, complex float *cx, int incx, complex float *cy, int incy) {
+complex float cdotu(unsigned int n, const complex float *cx, int incx, const complex float *cy, int incy) {
     complex float temp, dotu;
     int ix, iy;
 
@@ -121,7 +121,7 @@ complex float cdotu(unsigned int n, complex float *cx, int incx, complex float *
     return dotu;
 }
 
-complex double zdotu(unsigned int n, complex double *zx, int incx, complex double *zy, int incy) {
+complex double zdotu(unsigned int n, const complex double *zx, int incx, const complex double *zy, int incy) {
     complex double temp, dotu;
     int ix, iy;
 
@@ -148,4 +148,5 @@ complex double zdotu(unsigned int n, complex double *zx, int incx, complex doubl
     }
 
     dotu = temp;
-    return dotu;}
+    return dotu;
+}
