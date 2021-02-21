@@ -2,7 +2,7 @@
 // Created by jon on 2/20/21.
 //
 
-#include "coma_sswap.h"
+#include "coma_swap.h"
 
 float sswap_float(int n, float *sx, int incx, float *sy, int incy) {
     return 0;

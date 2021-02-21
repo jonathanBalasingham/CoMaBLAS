@@ -2,7 +2,7 @@
 // Created by jon on 2/20/21.
 //
 
-#include "coma_srot.h"
+#include "coma_rot.h"
 
 double srot_double(int n, double *sx, int incx, double *sy, int incy, double c, double s) {
     return 0;

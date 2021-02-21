@@ -2,7 +2,7 @@
 // Created by jon on 2/20/21.
 //
 
-#include "coma_scopy.h"
+#include "coma_copy.h"
 
 void scopy_float(int n, float *sx, int incx, float *sy, int incy) {
     return;
