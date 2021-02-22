@@ -3,6 +3,7 @@
 //
 #include <stdio.h>
 #include "../blas/coma_dot.h"
+#include "../munit/munit.h"
 
 int main(){
     float t1[3] = {1,2,3};
@@ -18,4 +19,6 @@ int main(){
 
     float answer2 = sdot(n2, (float *) &t3, 1, (float *) &t4, 1);
     printf("answer: %f\n", answer2);
+
+    // TODO: complex dot product tests
 }
