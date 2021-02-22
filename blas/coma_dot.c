@@ -6,27 +6,27 @@
 #include <stdio.h>
 
 float sdot(unsigned int n, float *sx, int incx, float *sy, int incy) {
-    float stemp = 0.0, sdot = 0.0;
+    float temp = 0.0, dot = 0.0;
     int i,ix,iy,m,mp1;
 
     if (n == 0)
-        return sdot;
+        return dot;
 
     if (incx == 1 && incy == 1) {
         m = n % 5;
         if (m != 0){
             for (int j = 0; j < m; ++j) {
-                stemp += sx[j] * sy[j];
+                temp += sx[j] * sy[j];
             }
 
             if (n < 5){
-                sdot = stemp;
-                return sdot;
+                dot = temp;
+                return dot;
             }
         }
         //mp1 = m + 1; unecessary since indexed at 0
         for (int j = m; j < n; j += 5) {
-            stemp += sx[j]*sy[j] + sx[j+1]*sy[j+1] + sx[j+2]*sy[j+2] + sx[j+3]*sy[j+3] + sx[j+4]*sy[j+4];
+            temp += sx[j]*sy[j] + sx[j+1]*sy[j+1] + sx[j+2]*sy[j+2] + sx[j+3]*sy[j+3] + sx[j+4]*sy[j+4];
         }
 
     } else {
@@ -37,23 +37,23 @@ float sdot(unsigned int n, float *sx, int incx, float *sy, int incy) {
             iy = (-1*n+1) * incy;
 
         for (int j = 0; j < n-1; ++j) {
-            stemp += sx[ix] * sy[iy];
+            temp += sx[ix] * sy[iy];
             ix += incx;
             iy += incy;
         }
 
     }
 
-    sdot = stemp;
-    return sdot;
+    dot = temp;
+    return dot;
 }
 
 double ddot(unsigned int n, const double *dx, int incx, const double *dy, int incy) {
-    double temp = 0, ddot = 0;
+    double temp = 0.0, dot = 0.0;
     int i,ix,iy,m,mp1;
 
     if (n == 0)
-        return ddot;
+        return dot;
 
     if (incx == 1 && incy == 1) {
         m = n % 5;
@@ -63,8 +63,8 @@ double ddot(unsigned int n, const double *dx, int incx, const double *dy, int in
             }
 
             if (n < 5){
-                ddot = temp;
-                return ddot;
+                dot = temp;
+                return dot;
             }
         }
         //mp1 = m + 1; unecessary since indexed at 0
@@ -87,8 +87,8 @@ double ddot(unsigned int n, const double *dx, int incx, const double *dy, int in
 
     }
 
-    ddot = temp;
-    return ddot;
+    dot = temp;
+    return dot;
 }
 
 complex float cdotu(unsigned int n, const complex float *cx, int incx, const complex float *cy, int incy) {
