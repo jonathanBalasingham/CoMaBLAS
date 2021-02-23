@@ -4,10 +4,74 @@
 
 #include "coma_copy.h"
 
-void scopy_float(int n, float *sx, int incx, float *sy, int incy) {
-    return;
+void scopy(unsigned int n, float *x, int incx, float *y, int incy) {
+    int m = n % 7;
+    if (n == 0)
+        return;
+
+    if (incx == 1 && incy == 1) {
+        if (m != 0){
+            for (int i = 0; i < m; ++i) {
+                y[i] = x[i];
+            }
+        }
+
+        for (int i = m; i < n; i += 7) {
+            y[i] = x[i];
+            y[i+1] = x[i+1];
+            y[i+2] = x[i+2];
+            y[i+3] = x[i+3];
+            y[i+4] = x[i+4];
+            y[i+5] = x[i+5];
+            y[i+6] = x[i+6];
+        }
+    } else {
+        int ix = 1, iy = 1;
+        if (incx < 0)
+            ix = (-1*n+1) * incx;
+        if (incx < 0)
+            iy = (-1*n+1) * incy;
+
+        for (int i = 0; i < n; ++i) {
+            y[iy] = x[ix];
+            ix += incx;
+            iy += incy;
+        }
+    }
 }
 
-void scopy_double(int n, double *sx, int incx, double *sy, int incy) {
-    return;
+void dcopy(unsigned int n, double *x, int incx, double *y, int incy) {
+    int m = n % 7;
+    if (n == 0)
+        return;
+
+    if (incx == 1 && incy == 1) {
+        if (m != 0){
+            for (int i = 0; i < m; ++i) {
+                y[i] = x[i];
+            }
+        }
+
+        for (int i = m; i < n; i += 7) {
+            y[i] = x[i];
+            y[i+1] = x[i+1];
+            y[i+2] = x[i+2];
+            y[i+3] = x[i+3];
+            y[i+4] = x[i+4];
+            y[i+5] = x[i+5];
+            y[i+6] = x[i+6];
+        }
+    } else {
+        int ix = 1, iy = 1;
+        if (incx < 0)
+            ix = (-1*n+1) * incx;
+        if (incx < 0)
+            iy = (-1*n+1) * incy;
+
+        for (int i = 0; i < n; ++i) {
+            y[iy] = x[ix];
+            ix += incx;
+            iy += incy;
+        }
+    }
 }
