@@ -75,3 +75,49 @@ void dcopy(unsigned int n, double *x, int incx, double *y, int incy) {
         }
     }
 }
+
+void ccopy(unsigned int n, const complex float *x, int incx, complex float *y, int incy) {
+    if (n == 0)
+        return;
+
+    if (incx == 1 && incy == 1) {
+        for (int i = 0; i < n; ++i) {
+            y[i] = x[i];
+        }
+    } else {
+        int ix = 1, iy = 1;
+        if (incx < 0)
+            ix = (-1*n+1) * incx;
+        if (incx < 0)
+            iy = (-1*n+1) * incy;
+
+        for (int i = 0; i < n; ++i) {
+            y[iy] = x[ix];
+            ix += incx;
+            iy += incy;
+        }
+    }
+}
+
+void zcopy(unsigned int n, const complex double *x, int incx, complex double *y, int incy) {
+    if (n == 0)
+        return;
+
+    if (incx == 1 && incy == 1) {
+        for (int i = 0; i < n; ++i) {
+            y[i] = x[i];
+        }
+    } else {
+        int ix = 1, iy = 1;
+        if (incx < 0)
+            ix = (-1*n+1) * incx;
+        if (incx < 0)
+            iy = (-1*n+1) * incy;
+
+        for (int i = 0; i < n; ++i) {
+            y[iy] = x[ix];
+            ix += incx;
+            iy += incy;
+        }
+    }
+}
