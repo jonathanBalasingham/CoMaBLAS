@@ -110,7 +110,7 @@ void cswap(unsigned int n, complex float *x, int incx, complex float *y, int inc
             y[i] = temp;
         }
     } else {
-        int ix = 1, iy = 1;
+        int ix = 0, iy = 0;
         if (incx < 0)
             ix = (-1*n+1) * incx + 1;
         if (incy < 0)
