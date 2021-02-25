@@ -17,7 +17,7 @@ float sasum(unsigned int n, float *x, int incx) {
             }
 
             if (n < 6)
-                asum = temp;
+                return temp;
         } else {
             for (int i = m; i < n; i += 6) {
                 temp += fabsf(x[i]) + fabsf(x[i+1]) + fabsf(x[i+2]) + fabsf(x[i+3]) + fabsf(x[i+4]) + fabsf(x[i+5]);
@@ -47,7 +47,7 @@ double dasum(unsigned int n, double *x, int incx) {
             }
 
             if (n < 6)
-                asum = temp;
+                return temp;
         } else {
             for (int i = m; i < n; i += 6) {
                 temp += fabs(x[i]) + fabs(x[i+1]) + fabs(x[i+2]) + fabs(x[i+3]) + fabs(x[i+4]) + fabs(x[i+5]);
@@ -61,4 +61,5 @@ double dasum(unsigned int n, double *x, int incx) {
     }
 
     asum = temp;
-    return asum;}
+    return asum;
+}
