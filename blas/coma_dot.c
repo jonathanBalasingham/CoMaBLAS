@@ -30,7 +30,7 @@ float sdot(unsigned int n, float *sx, int incx, float *sy, int incy) {
         }
 
     } else {
-        ix = 1, iy = 1;
+        ix = 0, iy = 0;
         if (incx < 0)
             ix = (-1*n+1) * incx;
         if (incy < 0)
@@ -73,7 +73,7 @@ double ddot(unsigned int n, const double *dx, int incx, const double *dy, int in
         }
 
     } else {
-        ix = 1, iy = 1;
+        ix = 0, iy = 0;
         if (incx < 0)
             ix = (-1*n+1) * incx;
         if (incy < 0)
@@ -104,7 +104,7 @@ complex float cdotu(unsigned int n, const complex float *cx, int incx, const com
             temp += cx[i] * cy[i];
         }
     } else {
-        ix = 1, iy = 1;
+        ix = 0, iy = 0;
         if (incx < 0)
             ix = (-1*n+1) * incx;
         if (incy < 0)
@@ -134,7 +134,7 @@ complex double zdotu(unsigned int n, const complex double *zx, int incx, const c
             temp += zx[i] * zy[i];
         }
     } else {
-        ix = 1, iy = 1;
+        ix = 0, iy = 0;
         if (incx < 0)
             ix = (-1*n+1) * incx;
         if (incy < 0)

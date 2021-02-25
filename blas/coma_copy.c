@@ -26,7 +26,7 @@ void scopy(unsigned int n, float *x, int incx, float *y, int incy) {
             y[i+6] = x[i+6];
         }
     } else {
-        int ix = 1, iy = 1;
+        int ix = 0, iy = 0;
         if (incx < 0)
             ix = (-1*n+1) * incx;
         if (incx < 0)
@@ -62,7 +62,7 @@ void dcopy(unsigned int n, double *x, int incx, double *y, int incy) {
             y[i+6] = x[i+6];
         }
     } else {
-        int ix = 1, iy = 1;
+        int ix = 0, iy = 0;
         if (incx < 0)
             ix = (-1*n+1) * incx;
         if (incx < 0)
@@ -85,7 +85,7 @@ void ccopy(unsigned int n, const complex float *x, int incx, complex float *y, i
             y[i] = x[i];
         }
     } else {
-        int ix = 1, iy = 1;
+        int ix = 0, iy = 0;
         if (incx < 0)
             ix = (-1*n+1) * incx;
         if (incx < 0)
@@ -108,7 +108,7 @@ void zcopy(unsigned int n, const complex double *x, int incx, complex double *y,
             y[i] = x[i];
         }
     } else {
-        int ix = 1, iy = 1;
+        int ix = 0, iy = 0;
         if (incx < 0)
             ix = (-1*n+1) * incx;
         if (incx < 0)
