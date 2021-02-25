@@ -5,7 +5,11 @@
 #ifndef COMABLAS_COMA_SWAP_H
 #define COMABLAS_COMA_SWAP_H
 
-float sswap_float(int n, float* sx, int incx, float* sy, int incy);
-double sswap_double(int n, double* sx, int incx, double* sy, int incy);
+#include <complex.h>
+
+void sswap(unsigned int n, float* x, int incx, float* y, int incy);
+void dswap(unsigned int n, double* x, int incx, double* y, int incy);
+void cswap(unsigned int n, complex float* x, int incx, complex float* y, int incy);
+void zswap(unsigned int n, complex double* x, int incx, complex double* y, int incy);
 
 #endif //COMABLAS_COMA_SWAP_H
