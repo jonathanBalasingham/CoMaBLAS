@@ -5,7 +5,7 @@
 #ifndef COMABLAS_COMA_AXPY_H
 #define COMABLAS_COMA_AXPY_H
 
-void saxpy_float(int n, float sa, float* sx, int incx, float* sy, int incy);
-void saxpy_double(int n, double sa, double* sx, int incx, double* sy, int incy);
+void saxpy(unsigned int n, float a, const float* x, int incx, float* y, int incy);
+void daxpy(unsigned int n, double a, const double* x, int incx, double* y, int incy);
 
 #endif //COMABLAS_COMA_AXPY_H
