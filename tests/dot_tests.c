@@ -5,6 +5,12 @@
 #include "../blas/coma_dot.h"
 #include "../munit/munit.h"
 
+void t_mod(int* a, int* b, int* c) {
+    *a = 1;
+    *b = 2;
+    *c = 3;
+}
+
 void main(){
     float t1[3] = {1,2,3};
     float t2[3] = {1,2,3};
@@ -31,4 +37,10 @@ void main(){
 
     double answer4 = ddot(n2, (double *) &t7, 1, (double *) &t8, 1);
     munit_assert_double(7.0, ==, answer4);
+
+
+    int a,b,c;
+    a=0,b=0,c=0;
+    t_mod(&a,&b,&c);
+    printf("%d, %d, %d", a, b, c);
 }
