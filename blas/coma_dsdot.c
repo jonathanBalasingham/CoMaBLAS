@@ -27,6 +27,7 @@ double sdsdot(unsigned int n, float b, float *x, int incx, float *y, int incy) {
             iy += incy;
         }
     }
+
     return dsdot;
 }
 
@@ -53,4 +54,5 @@ double dsdot(unsigned int n, double *x, int incx, double *y, int incy) {
             iy += incy;
         }
     }
-    return dsdot;}
+    return dsdot;
+}
