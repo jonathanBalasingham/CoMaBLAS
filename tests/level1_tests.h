@@ -81,8 +81,8 @@ MunitResult test_dznrm2(const MunitParameter params[], void* user_data_or_fixtur
 
 typedef MunitResult (*munit_test)(const MunitParameter[], void*);
 
-static const munit_test level1_tests[8] = {sdot_under5, sdot_over5, ddot_under5, ddot_under5,
-                                           test_snrm2, test_scnrm2, test_dnrm2, test_dznrm2};
+static const munit_test level1_tests[8] = {&sdot_under5, &sdot_over5, &ddot_under5, &ddot_under5,
+                                           &test_snrm2, &test_scnrm2, &test_dnrm2, &test_dznrm2};
 
 static const MunitSuite suite = {
         "/my-tests", /* name */
