@@ -4,8 +4,11 @@
 #define MUNIT_ENABLE_ASSERT_ALIASES
 #include "../munit/munit.h"
 #include "../blas/coma_dot.h"
-
-
+#include "../blas/coma_nrm2.h"
+#include <math.h>
+/*
+ * Dot Products
+ */
 MunitResult sdot_under5(const MunitParameter params[], void* user_data_or_fixture) {
     float t1[3] = {1,2,3};
     float t2[3] = {1,2,3};
@@ -46,9 +49,40 @@ MunitResult ddot_over5(const MunitParameter params[], void* user_data_or_fixture
     return MUNIT_OK;
 }
 
+/*
+ * Euclidean Norm
+ */
+MunitResult test_snrm2(const MunitParameter params[], void* user_data_or_fixture) {
+    unsigned int n = 3;
+    float t1[3] = {1,2,3};
+    munit_assert_float(3.74165, ==, snrm2(n, (float *) &t1, 1));
+}
+
+// TODO: What precision?
+MunitResult test_dnrm2(const MunitParameter params[], void* user_data_or_fixture) {
+    unsigned int n = 3;
+    float t1[3] = {1,2,3};
+    munit_assert_double_equal(3.7416573867739, dnrm2(n, (double *) &t1, 1), 10);
+}
+
+MunitResult test_scnrm2(const MunitParameter params[], void* user_data_or_fixture) {
+    unsigned int n = 3;
+    complex float t1[3] = {1 + 1*I, 2 + 2*I, 3 + 3*I};
+    assert_float((float) 2*sqrt(7), ==, scnrm2(n, (complex float *) &t1, 1));
+}
+
+// TODO: precision needed?
+MunitResult test_dznrm2(const MunitParameter params[], void* user_data_or_fixture) {
+    unsigned int n = 3;
+    complex float t1[3] = {1 + 1*I, 2 + 2*I, 3 + 3*I};
+    assert_double_equal((double) 2*sqrt(7), scnrm2(n, (complex float *) &t1, 1), 10);
+}
+
+
 typedef MunitResult (*munit_test)(const MunitParameter[], void*);
 
-static const munit_test level1_tests[4] = {sdot_under5, sdot_over5, ddot_under5, ddot_under5};
+static const munit_test level1_tests[8] = {sdot_under5, sdot_over5, ddot_under5, ddot_under5,
+                                           test_snrm2, test_scnrm2, test_dnrm2, test_dznrm2};
 
 static const MunitSuite suite = {
         "/my-tests", /* name */
