@@ -122,7 +122,7 @@ MunitResult test_ccopy(const MunitParameter params[], void* user_data_or_fixture
 
 MunitResult test_zcopy(const MunitParameter params[], void* user_data_or_fixture) {
     unsigned int n = 6;
-    const complex double t1[6] = {1,2,3,4,5,6};
+    const complex double t1[6] = {1+1*I,2+2*I,3+3*I,4+4*I,5+5*I,6+6*I};
     complex double* t2;
     t2 = malloc(sizeof(t1));
     zcopy(n, (const complex double *) &t1, 1, t2, 1);
@@ -157,15 +157,42 @@ MunitResult test_dscal(const MunitParameter params[], void* user_data_or_fixture
     }
 }
 
+// TODO: adjust assertion
+MunitResult test_cscal(const MunitParameter params[], void* user_data_or_fixture) {
+    unsigned int n = 6;
+    complex float t1[6] = {1+1*I,2+2*I,3+3*I,4+4*I,5+5*I,6+6*I};
+    const complex float t2[6] = {2+2*I,4+4*I,6+6*I,8+8*I,10+10*I,12+12*I};
+    complex float sa = 2 + 1*I;
+    cscal(n, sa, (complex float *) &t1, 1);
+
+    for (int i = 0; i < n; ++i) {
+        assert_float(t1[i], ==, t2[i]);
+    }
+}
+
+// TODO: adjust assertion
+MunitResult test_zscal(const MunitParameter params[], void* user_data_or_fixture) {
+    unsigned int n = 6;
+    complex double t1[6] = {1+1*I,2+2*I,3+3*I,4+4*I,5+5*I,6+6*I};
+    const complex double t2[6] = {2+2*I,4+4*I,6+6*I,8+8*I,10+10*I,12+12*I};
+    complex double sa = 2 + 1*I;
+    cscal(n, sa, (complex float *) &t1, 1);
+
+    for (int i = 0; i < n; ++i) {
+        assert_double(t1[i], ==, t2[i]);
+    }
+}
+
 typedef MunitResult (*munit_test)(const MunitParameter[], void*);
 
-static const munit_test level1_tests[12] = {&sdot_under5, &sdot_over5, &ddot_under5, &ddot_under5,
+static const munit_test level1_tests[16] = {&sdot_under5, &sdot_over5, &ddot_under5, &ddot_under5,
                                            &test_snrm2, &test_scnrm2, &test_dnrm2, &test_dznrm2,
-                                           &test_scopy, &test_dcopy, &test_ccopy, &test_zcopy};
+                                           &test_scopy, &test_dcopy, &test_ccopy, &test_zcopy,
+                                           &test_sscal, &test_dscal, &test_cscal, &test_zscal};
 
 static const MunitSuite suite = {
         "/my-tests", /* name */
-        level1_tests, /* tests */
+        &level1_tests, /* tests */
         NULL, /* suites */
         1, /* iterations */
         MUNIT_SUITE_OPTION_NONE /* options */
