@@ -6,6 +6,7 @@
 #include "../blas/coma_dot.h"
 #include "../blas/coma_nrm2.h"
 #include "../blas/coma_copy.h"
+#include "../blas/coma_scal.h"
 #include <math.h>
 /*
  * Dot Products
@@ -99,12 +100,13 @@ MunitResult test_dcopy(const MunitParameter params[], void* user_data_or_fixture
     t2 = malloc(sizeof(t1));
     dcopy(n, (double *) &t1, 1, t2, 1);
     for (int i = 0; i < n; ++i) {
-        assert_float(t1[i], ==, t2[i]);
+        assert_double(t1[i], ==, t2[i]);
     }
 
     free(t2);
 }
 
+// TODO: Munit doesnt have complex number comparisons
 MunitResult test_ccopy(const MunitParameter params[], void* user_data_or_fixture) {
     unsigned int n = 6;
     complex float t1[6] = {1,2,3,4,5,6};
@@ -125,10 +127,34 @@ MunitResult test_zcopy(const MunitParameter params[], void* user_data_or_fixture
     t2 = malloc(sizeof(t1));
     zcopy(n, (const complex double *) &t1, 1, t2, 1);
     for (int i = 0; i < n; ++i) {
-        assert_float(t1[i], ==, t2[i]);
+        assert_double(t1[i], ==, t2[i]);
     }
 
     free(t2);
+}
+
+MunitResult test_sscal(const MunitParameter params[], void* user_data_or_fixture) {
+    unsigned int n = 6;
+    float t1[6] = {1,2,3,4,5,6};
+    float t2[6] = {2,4,6,8,10,12};
+    float sa = 2;
+    sscal(n, sa, (float *) &t1, 1);
+
+    for (int i = 0; i < n; ++i) {
+        assert_float(t1[i], ==, t2[i]);
+    }
+}
+
+MunitResult test_dscal(const MunitParameter params[], void* user_data_or_fixture) {
+    unsigned int n = 6;
+    double t1[6] = {1,2,3,4,5,6};
+    double t2[6] = {2,4,6,8,10,12};
+    double sa = 2;
+    dscal(n, sa, (double *) &t1, 1);
+
+    for (int i = 0; i < n; ++i) {
+        assert_double(t1[i], ==, t2[i]);
+    }
 }
 
 typedef MunitResult (*munit_test)(const MunitParameter[], void*);
