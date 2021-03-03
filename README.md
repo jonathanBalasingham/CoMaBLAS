@@ -12,10 +12,10 @@ A pure C implementation of BLAS, based on the LAPACK Fortran implementation.
 - SSCAL - x = a*x
 - SCOPY - copy x into y
 - SAXPY - y = a*x + y
-- SDOT - dot product
+- SDOT - dot product [TESTED]
 - SDSDOT - dot product with extended precision accumulation
-- SNRM2 - Euclidean norm
-- SCNRM2- Euclidean norm
+- SNRM2 - Euclidean norm [TESTED]
+- SCNRM2- Euclidean norm [TESTED]
 - SASUM - sum of absolute values
 - ISAMAX - index of max abs value
 
@@ -27,11 +27,11 @@ A pure C implementation of BLAS, based on the LAPACK Fortran implementation.
 - DROTM - apply modified Givens rotation
 - DSWAP - swap x and y
 - DSCAL - x = a*x
-- DCOPY - copy x into y
+- DCOPY - copy x into y [TESTED]
 - DAXPY - y = a*x + y
-- DDOT - dot product
+- DDOT - dot product [TESTED]
 - DSDOT - dot product with extended precision accumulation
-- DNRM2 - Euclidean norm
-- DZNRM2 - Euclidean norm
+- DNRM2 - Euclidean norm [TESTED]
+- DZNRM2 - Euclidean norm [TESTED]
 - DASUM - sum of absolute values
 - IDAMAX - index of max abs value
