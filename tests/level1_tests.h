@@ -5,6 +5,7 @@
 #include "../munit/munit.h"
 #include "../blas/coma_dot.h"
 #include "../blas/coma_nrm2.h"
+#include "../blas/coma_copy.h"
 #include <math.h>
 /*
  * Dot Products
@@ -78,11 +79,63 @@ MunitResult test_dznrm2(const MunitParameter params[], void* user_data_or_fixtur
     assert_double_equal((double) 2*sqrt(7), scnrm2(n, (complex float *) &t1, 1), 10);
 }
 
+MunitResult test_scopy(const MunitParameter params[], void* user_data_or_fixture) {
+    unsigned int n = 6;
+    float t1[6] = {1,2,3,4,5,6};
+    float* t2;
+    t2 = malloc(sizeof(t1));
+    scopy(n, &t1, 1, t2, 1);
+    for (int i = 0; i < n; ++i) {
+        assert_float(t1[i], ==, t2[i]);
+    }
+
+    free(t2);
+}
+
+MunitResult test_dcopy(const MunitParameter params[], void* user_data_or_fixture) {
+    unsigned int n = 6;
+    double t1[6] = {1,2,3,4,5,6};
+    double* t2;
+    t2 = malloc(sizeof(t1));
+    dcopy(n, (double *) &t1, 1, t2, 1);
+    for (int i = 0; i < n; ++i) {
+        assert_float(t1[i], ==, t2[i]);
+    }
+
+    free(t2);
+}
+
+MunitResult test_ccopy(const MunitParameter params[], void* user_data_or_fixture) {
+    unsigned int n = 6;
+    complex float t1[6] = {1,2,3,4,5,6};
+    complex float* t2;
+    t2 = malloc(sizeof(t1));
+    scopy(n, &t1, 1, (float *) t2, 1);
+    for (int i = 0; i < n; ++i) {
+        assert_float(t1[i], ==, t2[i]);
+    }
+
+    free(t2);
+}
+
+MunitResult test_zcopy(const MunitParameter params[], void* user_data_or_fixture) {
+    unsigned int n = 6;
+    const complex double t1[6] = {1,2,3,4,5,6};
+    complex double* t2;
+    t2 = malloc(sizeof(t1));
+    zcopy(n, (const complex double *) &t1, 1, t2, 1);
+    for (int i = 0; i < n; ++i) {
+        assert_float(t1[i], ==, t2[i]);
+    }
+
+    free(t2);
+}
 
 typedef MunitResult (*munit_test)(const MunitParameter[], void*);
 
-static const munit_test level1_tests[8] = {&sdot_under5, &sdot_over5, &ddot_under5, &ddot_under5,
-                                           &test_snrm2, &test_scnrm2, &test_dnrm2, &test_dznrm2};
+static const munit_test level1_tests[12] = {&sdot_under5, &sdot_over5, &ddot_under5, &ddot_under5,
+                                           &test_snrm2, &test_scnrm2, &test_dnrm2, &test_dznrm2,
+                                           &test_scopy, &test_dcopy, &test_ccopy, &test_zcopy};
 
 static const MunitSuite suite = {
         "/my-tests", /* name */

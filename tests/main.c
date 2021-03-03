@@ -1,6 +1,7 @@
 //
 // Created by jon on 3/1/21.
 //
+#include <stdio.h>
 #include "level1_tests.h"
 
 int main (int argc, const char* argv[]) {
