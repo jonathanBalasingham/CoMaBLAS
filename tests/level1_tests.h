@@ -7,6 +7,7 @@
 #include "../blas/coma_nrm2.h"
 #include "../blas/coma_copy.h"
 #include "../blas/coma_scal.h"
+#include "../blas/coma_axpy.h"
 #include <math.h>
 /*
  * Dot Products
@@ -180,6 +181,34 @@ MunitResult test_zscal(const MunitParameter params[], void* user_data_or_fixture
 
     for (int i = 0; i < n; ++i) {
         assert_double(t1[i], ==, t2[i]);
+    }
+}
+
+MunitResult test_saxpy(const MunitParameter params[], void* user_data_or_fixture) {
+    unsigned int n = 6;
+    float t1[6] = {1,2,3,4,5,6};
+    float t2[6] = {2,4,6,8,10,12};
+    float t3[6] = {4,8,12,16,20,24};
+
+    float sa = 2;
+    saxpy(n, sa, (float *) &t1, 1, (float *) &t2, 1);
+
+    for (int i = 0; i < n; ++i) {
+        assert_float(t1[i], ==, t3[i]);
+    }
+}
+
+MunitResult test_daxpy(const MunitParameter params[], void* user_data_or_fixture) {
+    unsigned int n = 6;
+    double t1[6] = {1,2,3,4,5,6};
+    double t2[6] = {2,4,6,8,10,12};
+    float t3[6] = {4,8,12,16,20,24};
+
+    double sa = 2;
+    daxpy(n, sa, (double *) &t1, 1, (double *) &t2, 1);
+
+    for (int i = 0; i < n; ++i) {
+        assert_double(t1[i], ==, t3[i]);
     }
 }
 
