@@ -10,8 +10,8 @@ A pure C implementation of BLAS, based on the LAPACK Fortran implementation.
 - SROTM - apply modified Givens rotation
 - SSWAP - swap x and y
 - SSCAL - x = a*x [TESTED]
-- SCOPY - copy x into y
-- SAXPY - y = a*x + y
+- SCOPY - copy x into y [TESTED]
+- SAXPY - y = a*x + y [TESTED]
 - SDOT - dot product [TESTED]
 - SDSDOT - dot product with extended precision accumulation
 - SNRM2 - Euclidean norm [TESTED]
@@ -28,7 +28,7 @@ A pure C implementation of BLAS, based on the LAPACK Fortran implementation.
 - DSWAP - swap x and y
 - DSCAL - x = a*x [TESTED]
 - DCOPY - copy x into y [TESTED]
-- DAXPY - y = a*x + y
+- DAXPY - y = a*x + y [TESTED]
 - DDOT - dot product [TESTED]
 - DSDOT - dot product with extended precision accumulation
 - DNRM2 - Euclidean norm [TESTED]
