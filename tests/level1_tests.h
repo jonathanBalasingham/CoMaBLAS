@@ -325,14 +325,6 @@ static const MunitTest level1_tests[] = {
         { NULL, NULL, NULL, NULL, MUNIT_TEST_OPTION_NONE, NULL }
 };
 
-/*
-        { &sdot_under5, &sdot_over5, &ddot_under5, &ddot_under5,
-                                           &test_snrm2, &test_scnrm2, &test_dnrm2, &test_dznrm2,
-                                           &test_scopy, &test_dcopy, &test_ccopy, &test_zcopy,
-                                           &test_sscal, &test_dscal, &test_cscal, &test_zscal,
-                                           &test_saxpy, &test_daxpy};
-*/
-
 static const MunitSuite suite = {
         "/level1", /* name */
         level1_tests, /* tests */
