@@ -8,6 +8,7 @@
 #include "../blas/coma_copy.h"
 #include "../blas/coma_scal.h"
 #include "../blas/coma_axpy.h"
+#include "../blas/coma_swap.h"
 #include <math.h>
 /*
  * Dot Products
@@ -212,6 +213,38 @@ MunitResult test_daxpy(const MunitParameter params[], void* user_data_or_fixture
     }
 }
 
+MunitResult test_sswap(const MunitParameter params[], void* user_data_or_fixture) {
+    unsigned int n = 6;
+    float t1[6] = {1,2,3,4,5,6};
+    float t2[6] = {2,4,6,8,10,12};
+
+    float t3[6] = {1,2,3,4,5,6};
+    float t4[6] = {2,4,6,8,10,12};
+
+    sswap(n, (float *) &t1, 1, (float *) &t2, 1);
+
+    for (int i = 0; i < n; ++i) {
+        assert_float(t2[i], ==, t3[i]);
+        assert_float(t1[i], ==, t4[i]);
+    }
+}
+
+MunitResult test_dswap(const MunitParameter params[], void* user_data_or_fixture) {
+    unsigned int n = 6;
+    double t1[6] = {1,2,3,4,5,6};
+    double t2[6] = {2,4,6,8,10,12};
+
+    double t3[6] = {1,2,3,4,5,6};
+    double t4[6] = {2,4,6,8,10,12};
+
+    dswap(n, (double *) &t1, 1, (double *) &t2, 1);
+
+    for (int i = 0; i < n; ++i) {
+        assert_double(t2[i], ==, t3[i]);
+        assert_double(t1[i], ==, t4[i]);
+    }
+}
+
 
 static const MunitTest level1_tests[] = {
         {
@@ -319,6 +352,18 @@ static const MunitTest level1_tests[] = {
         {
                 (char*) "/axpy/daxpy",
                 test_daxpy,
+                MUNIT_TEST_OPTION_NONE,
+                NULL
+        },
+        {
+                (char*) "/swap/sswap",
+                test_sswap,
+                MUNIT_TEST_OPTION_NONE,
+                NULL
+        },
+        {
+                (char*) "/swap/dswap",
+                test_dswap,
                 MUNIT_TEST_OPTION_NONE,
                 NULL
         },
