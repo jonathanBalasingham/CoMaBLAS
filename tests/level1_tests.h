@@ -77,8 +77,8 @@ MunitResult test_scnrm2(const MunitParameter params[], void* user_data_or_fixtur
 // TODO: precision needed?
 MunitResult test_dznrm2(const MunitParameter params[], void* user_data_or_fixture) {
     unsigned int n = 3;
-    complex float t1[3] = {1 + 1*I, 2 + 2*I, 3 + 3*I};
-    assert_double_equal((double) 2*sqrt(7), scnrm2(n, (complex float *) &t1, 1), 5);
+    complex double t1[3] = {1 + 1*I, 2 + 2*I, 3 + 3*I};
+    assert_double_equal((double) 2*sqrt(7), dznrm2(n, (complex double *) &t1, 1), 5);
 }
 
 MunitResult test_scopy(const MunitParameter params[], void* user_data_or_fixture) {
