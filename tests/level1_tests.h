@@ -108,15 +108,15 @@ MunitResult test_dcopy(const MunitParameter params[], void* user_data_or_fixture
     free(t2);
 }
 
-// TODO: Munit doesnt have complex number comparisons
 MunitResult test_ccopy(const MunitParameter params[], void* user_data_or_fixture) {
     unsigned int n = 6;
-    complex float t1[6] = {1,2,3,4,5,6};
+    complex float t1[6] = {1 + I,2 + I,3 + I,4 + I,5 + I,6 + I};
     complex float* t2;
     t2 = malloc(n*sizeof(t1[0]));
     ccopy(n, (const complex float *) &t1, 1, t2, 1);
     for (int i = 0; i < n; ++i) {
-        assert_float(t1[i], ==, t2[i]);
+        assert_float(crealf(t1[i]), ==, crealf(t2[i]));
+        assert_float(cimagf(t1[i]), ==, cimagf(t2[i]));
     }
 
     free(t2);
@@ -244,7 +244,6 @@ MunitResult test_dswap(const MunitParameter params[], void* user_data_or_fixture
         assert_double(t1[i], ==, t4[i]);
     }
 }
-
 
 static const MunitTest level1_tests[] = {
         {
