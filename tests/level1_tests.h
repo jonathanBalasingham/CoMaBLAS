@@ -129,7 +129,8 @@ MunitResult test_zcopy(const MunitParameter params[], void* user_data_or_fixture
     t2 = malloc(sizeof(t1));
     zcopy(n, (const complex double *) &t1, 1, t2, 1);
     for (int i = 0; i < n; ++i) {
-        assert_double(t1[i], ==, t2[i]);
+        assert_double(creal(t1[i]), ==, creal(t2[i]));
+        assert_double(cimag(t1[i]), ==, cimag(t2[i]));
     }
 
     free(t2);
