@@ -246,6 +246,42 @@ MunitResult test_dswap(const MunitParameter params[], void* user_data_or_fixture
     }
 }
 
+MunitResult test_cswap(const MunitParameter params[], void* user_data_or_fixture) {
+    unsigned int n = 6;
+    complex float t1[6] = {1 + I,2 + I,3 + I,4 + I,5 + I,6 + I};
+    complex float t2[6] = {2 + I,4 + I,6 + I,8 + I,10 + I,12 + I};
+
+    complex float t3[6] = {1 + I,2 + I,3 + I,4 + I,5 + I,6 + I};
+    complex float t4[6] = {2 + I,4 + I,6 + I,8 + I,10 + I,12 + I};
+
+    cswap(n, (complex float *) &t1, 1, (complex float *) &t2, 1);
+
+    for (int i = 0; i < n; ++i) {
+        assert_float(crealf(t2[i]), ==, crealf(t3[i]));
+        assert_float(crealf(t1[i]), ==, crealf(t4[i]));
+        assert_float(cimagf(t2[i]), ==, cimagf(t3[i]));
+        assert_float(cimagf(t1[i]), ==, cimagf(t4[i]));
+    }
+}
+
+MunitResult test_zswap(const MunitParameter params[], void* user_data_or_fixture) {
+    unsigned int n = 6;
+    double t1[6] = {1 + I,2 + I,3 + I,4 + I,5 + I,6 + I};
+    double t2[6] = {2 + I,4 + I,6 + I,8 + I,10 + I,12 + I};
+
+    double t3[6] = {1 + I,2 + I,3 + I,4 + I,5 + I,6 + I};
+    double t4[6] = {2 + I,4 + I,6 + I,8 + I,10 + I,12 + I};
+
+    zswap(n, (complex double *) &t1, 1, (complex double *) &t2, 1);
+
+    for (int i = 0; i < n; ++i) {
+        assert_double(creal(t2[i]), ==, creal(t3[i]));
+        assert_double(creal(t1[i]), ==, creal(t4[i]));
+        assert_double(cimag(t2[i]), ==, cimag(t3[i]));
+        assert_double(cimag(t1[i]), ==, cimag(t4[i]));
+    }
+}
+
 static const MunitTest level1_tests[] = {
         {
                 (char*) "/dot/sdot1",
