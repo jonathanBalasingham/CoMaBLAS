@@ -8,7 +8,7 @@ A pure C implementation of BLAS, based on the LAPACK Fortran implementation.
 - SROTMG - setup modified Givens rotation
 - SROT - apply Givens rotation
 - SROTM - apply modified Givens rotation
-- SSWAP - swap x and y
+- SSWAP - swap x and y [TESTED]
 - SSCAL - x = a*x [TESTED]
 - SCOPY - copy x into y [TESTED]
 - SAXPY - y = a*x + y [TESTED]
@@ -25,7 +25,7 @@ A pure C implementation of BLAS, based on the LAPACK Fortran implementation.
 - DROTMG - setup modified Givens rotation
 - DROT - apply Givens rotation
 - DROTM - apply modified Givens rotation
-- DSWAP - swap x and y
+- DSWAP - swap x and y [TESTED]
 - DSCAL - x = a*x [TESTED]
 - DCOPY - copy x into y [TESTED]
 - DAXPY - y = a*x + y [TESTED]
