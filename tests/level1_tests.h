@@ -73,7 +73,7 @@ MunitResult test_dnrm2(const MunitParameter params[], void* user_data_or_fixture
 MunitResult test_scnrm2(const MunitParameter params[], void* user_data_or_fixture) {
     unsigned int n = 3;
     complex float t1[3] = {1 + 1*I, 2 + 2*I, 3 + 3*I};
-    assert_float((float) 2*sqrt(7), ==, scnrm2(n, (complex float *) &t1, 1));
+    assert_double_equal((float) 2*sqrt(7), scnrm2(n, (complex float *) &t1, 1), 5);
 }
 
 // TODO: precision needed?
@@ -143,10 +143,7 @@ MunitResult test_sscal(const MunitParameter params[], void* user_data_or_fixture
     float t2[6] = {2,4,6,8,10,12};
     float sa = 2;
     sscal(n, sa, (float *) &t1, 1);
-
-    for (int i = 0; i < n; ++i) {
-        assert_float(t1[i], ==, t2[i]);
-    }
+    assert_float(t1[0], ==, t2[0]);
 }
 
 MunitResult test_dscal(const MunitParameter params[], void* user_data_or_fixture) {
@@ -276,13 +273,12 @@ MunitResult test_zswap(const MunitParameter params[], void* user_data_or_fixture
     zswap(n, (complex double *) &t1, 1, (complex double *) &t2, 1);
 
     for (int i = 0; i < n; ++i) {
-        assert_double(creal(t2[i]), ==, creal(t3[i]));
-        assert_double(creal(t1[i]), ==, creal(t4[i]));
-        assert_double(cimag(t2[i]), ==, cimag(t3[i]));
-        assert_double(cimag(t1[i]), ==, cimag(t4[i]));
+        assert_double_equal(creal(t2[i]), creal(t3[i]), 8);
+        assert_double_equal(creal(t1[i]), creal(t4[i]), 8);
+        assert_double_equal(cimag(t2[i]), cimag(t3[i]), 8);
+        assert_double_equal(cimag(t1[i]), cimag(t4[i]), 8);
     }
 }
-
 
 MunitResult test_isamax(const MunitParameter params[], void* user_data_or_fixture) {
     unsigned int n = 6;
@@ -425,6 +421,18 @@ static const MunitTest level1_tests[] = {
         {
                 (char*) "/swap/dswap",
                 test_dswap,
+                MUNIT_TEST_OPTION_NONE,
+                NULL
+        },
+        {
+                (char*) "/swap/cswap",
+                test_cswap,
+                MUNIT_TEST_OPTION_NONE,
+                NULL
+        },
+        {
+                (char*) "/swap/zswap",
+                test_zswap,
                 MUNIT_TEST_OPTION_NONE,
                 NULL
         },
