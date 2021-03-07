@@ -9,6 +9,7 @@
 #include "../blas/coma_scal.h"
 #include "../blas/coma_axpy.h"
 #include "../blas/coma_swap.h"
+#include "../blas/coma_iamax.h"
 #include <math.h>
 /*
  * Dot Products
@@ -282,6 +283,30 @@ MunitResult test_zswap(const MunitParameter params[], void* user_data_or_fixture
     }
 }
 
+
+MunitResult test_isamax(const MunitParameter params[], void* user_data_or_fixture) {
+    unsigned int n = 6;
+    unsigned int n2 = 3;
+    float t1[6] = {1,2,3,4,5,6};
+    float t2[3] = {3,2,1};
+    int ind  = isamax(n, (float *) &t1, 1);
+    int ind2  = isamax(n2, (float *) &t2, 1);
+    assert_int(ind, ==, 5);
+    assert_int(ind2, ==, 0);
+}
+
+MunitResult test_idamax(const MunitParameter params[], void* user_data_or_fixture) {
+    unsigned int n = 6;
+    unsigned int n2 = 2;
+    double t1[6] = {1,2,3,4,5,6};
+    double t2[3] = {3,2,1};
+    int ind  = idamax(n, (double *) &t1, 1);
+    int ind2  = idamax(n2, (double *) &t2, 1);
+    assert_int(ind, ==, 5);
+    assert_int(ind2, ==, 0);
+}
+
+
 static const MunitTest level1_tests[] = {
         {
                 (char*) "/dot/sdot1",
@@ -400,6 +425,18 @@ static const MunitTest level1_tests[] = {
         {
                 (char*) "/swap/dswap",
                 test_dswap,
+                MUNIT_TEST_OPTION_NONE,
+                NULL
+        },
+        {
+                (char*) "/amax/isamax",
+                test_isamax,
+                MUNIT_TEST_OPTION_NONE,
+                NULL
+        },
+        {
+                (char*) "/amax/idamax",
+                test_idamax,
                 MUNIT_TEST_OPTION_NONE,
                 NULL
         },
