@@ -61,6 +61,7 @@ MunitResult test_snrm2(const MunitParameter params[], void* user_data_or_fixture
     unsigned int n = 3;
     float t1[3] = {1,2,3};
     munit_assert_double_equal(3.741657, snrm2(n, (float *) &t1, 1), 6);
+    return MUNIT_OK;
 }
 
 // TODO: What precision?
@@ -68,12 +69,14 @@ MunitResult test_dnrm2(const MunitParameter params[], void* user_data_or_fixture
     unsigned int n = 3;
     double t1[3] = {1,2,3};
     munit_assert_double_equal(3.7416573867739, dnrm2(n, (double *) &t1, 1), 10);
+    return MUNIT_OK;
 }
 
 MunitResult test_scnrm2(const MunitParameter params[], void* user_data_or_fixture) {
     unsigned int n = 3;
     complex float t1[3] = {1 + 1*I, 2 + 2*I, 3 + 3*I};
     assert_double_equal((float) 2*sqrt(7), scnrm2(n, (complex float *) &t1, 1), 5);
+    return MUNIT_OK;
 }
 
 // TODO: precision needed?
@@ -81,6 +84,7 @@ MunitResult test_dznrm2(const MunitParameter params[], void* user_data_or_fixtur
     unsigned int n = 3;
     complex double t1[3] = {1 + 1*I, 2 + 2*I, 3 + 3*I};
     assert_double_equal((double) 2*sqrt(7), dznrm2(n, (complex double *) &t1, 1), 5);
+    return MUNIT_OK;
 }
 
 MunitResult test_scopy(const MunitParameter params[], void* user_data_or_fixture) {
@@ -94,6 +98,7 @@ MunitResult test_scopy(const MunitParameter params[], void* user_data_or_fixture
     }
 
     free(t2);
+    return MUNIT_OK;
 }
 
 MunitResult test_dcopy(const MunitParameter params[], void* user_data_or_fixture) {
@@ -107,6 +112,7 @@ MunitResult test_dcopy(const MunitParameter params[], void* user_data_or_fixture
     }
 
     free(t2);
+    return MUNIT_OK;
 }
 
 MunitResult test_ccopy(const MunitParameter params[], void* user_data_or_fixture) {
@@ -121,6 +127,7 @@ MunitResult test_ccopy(const MunitParameter params[], void* user_data_or_fixture
     }
 
     free(t2);
+    return MUNIT_OK;
 }
 
 MunitResult test_zcopy(const MunitParameter params[], void* user_data_or_fixture) {
@@ -135,6 +142,7 @@ MunitResult test_zcopy(const MunitParameter params[], void* user_data_or_fixture
     }
 
     free(t2);
+    return MUNIT_OK;
 }
 
 MunitResult test_sscal(const MunitParameter params[], void* user_data_or_fixture) {
@@ -144,6 +152,8 @@ MunitResult test_sscal(const MunitParameter params[], void* user_data_or_fixture
     float sa = 2;
     sscal(n, sa, (float *) &t1, 1);
     assert_float(t1[0], ==, t2[0]);
+
+    return MUNIT_OK;
 }
 
 MunitResult test_dscal(const MunitParameter params[], void* user_data_or_fixture) {
@@ -156,6 +166,8 @@ MunitResult test_dscal(const MunitParameter params[], void* user_data_or_fixture
     for (int i = 0; i < n; ++i) {
         assert_double(t1[i], ==, t2[i]);
     }
+
+    return MUNIT_OK;
 }
 
 MunitResult test_cscal(const MunitParameter params[], void* user_data_or_fixture) {
@@ -169,6 +181,8 @@ MunitResult test_cscal(const MunitParameter params[], void* user_data_or_fixture
         assert_float(crealf(t1[i]), ==, crealf(sa) * crealf(t2[i]) - cimagf(sa) * cimagf(t2[i]));
         assert_float(cimagf(t1[i]), ==, crealf(sa) * cimagf(t2[i]) + cimagf(sa) * crealf(t2[i]));
     }
+
+    return MUNIT_OK;
 }
 
 MunitResult test_zscal(const MunitParameter params[], void* user_data_or_fixture) {
@@ -182,6 +196,8 @@ MunitResult test_zscal(const MunitParameter params[], void* user_data_or_fixture
         assert_double(creal(t1[i]), ==, creal(sa) * creal(t2[i]) - cimag(sa) * cimag(t2[i]));
         assert_double(cimag(t1[i]), ==, creal(sa) * cimag(t2[i]) + cimag(sa) * creal(t2[i]));
     }
+
+    return MUNIT_OK;
 }
 
 MunitResult test_saxpy(const MunitParameter params[], void* user_data_or_fixture) {
@@ -196,6 +212,8 @@ MunitResult test_saxpy(const MunitParameter params[], void* user_data_or_fixture
     for (int i = 0; i < n; ++i) {
         assert_float(t2[i], ==, t3[i]);
     }
+
+    return MUNIT_OK;
 }
 
 MunitResult test_daxpy(const MunitParameter params[], void* user_data_or_fixture) {
@@ -210,6 +228,7 @@ MunitResult test_daxpy(const MunitParameter params[], void* user_data_or_fixture
     for (int i = 0; i < n; ++i) {
         assert_double(t2[i], ==, t3[i]);
     }
+    return MUNIT_OK;
 }
 
 MunitResult test_sswap(const MunitParameter params[], void* user_data_or_fixture) {
@@ -226,6 +245,8 @@ MunitResult test_sswap(const MunitParameter params[], void* user_data_or_fixture
         assert_float(t2[i], ==, t3[i]);
         assert_float(t1[i], ==, t4[i]);
     }
+
+    return MUNIT_OK;
 }
 
 MunitResult test_dswap(const MunitParameter params[], void* user_data_or_fixture) {
@@ -242,6 +263,8 @@ MunitResult test_dswap(const MunitParameter params[], void* user_data_or_fixture
         assert_double(t2[i], ==, t3[i]);
         assert_double(t1[i], ==, t4[i]);
     }
+
+    return MUNIT_OK;
 }
 
 MunitResult test_cswap(const MunitParameter params[], void* user_data_or_fixture) {
@@ -260,6 +283,8 @@ MunitResult test_cswap(const MunitParameter params[], void* user_data_or_fixture
         assert_float(cimagf(t2[i]), ==, cimagf(t3[i]));
         assert_float(cimagf(t1[i]), ==, cimagf(t4[i]));
     }
+
+    return MUNIT_OK;
 }
 
 MunitResult test_zswap(const MunitParameter params[], void* user_data_or_fixture) {
@@ -278,6 +303,8 @@ MunitResult test_zswap(const MunitParameter params[], void* user_data_or_fixture
         assert_double_equal(cimag(t2[i]), cimag(t3[i]), 8);
         assert_double_equal(cimag(t1[i]), cimag(t4[i]), 8);
     }
+
+    return MUNIT_OK;
 }
 
 MunitResult test_isamax(const MunitParameter params[], void* user_data_or_fixture) {
@@ -289,6 +316,8 @@ MunitResult test_isamax(const MunitParameter params[], void* user_data_or_fixtur
     int ind2  = isamax(n2, (float *) &t2, 1);
     assert_int(ind, ==, 5);
     assert_int(ind2, ==, 0);
+
+    return MUNIT_OK;
 }
 
 MunitResult test_idamax(const MunitParameter params[], void* user_data_or_fixture) {
@@ -300,6 +329,8 @@ MunitResult test_idamax(const MunitParameter params[], void* user_data_or_fixtur
     int ind2  = idamax(n2, (double *) &t2, 1);
     assert_int(ind, ==, 5);
     assert_int(ind2, ==, 0);
+
+    return MUNIT_OK;
 }
 
 
