@@ -17,7 +17,7 @@ A pure C implementation of BLAS, based on the LAPACK Fortran implementation.
 - SNRM2 - Euclidean norm [TESTED]
 - SCNRM2- Euclidean norm [TESTED]
 - SASUM - sum of absolute values
-- ISAMAX - index of max abs value
+- ISAMAX - index of max abs value [TESTED]
 
 
 
@@ -34,4 +34,4 @@ A pure C implementation of BLAS, based on the LAPACK Fortran implementation.
 - DNRM2 - Euclidean norm [TESTED]
 - DZNRM2 - Euclidean norm [TESTED]
 - DASUM - sum of absolute values
-- IDAMAX - index of max abs value
+- IDAMAX - index of max abs value [TESTED]
