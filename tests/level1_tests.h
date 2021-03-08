@@ -10,6 +10,7 @@
 #include "../blas/coma_axpy.h"
 #include "../blas/coma_swap.h"
 #include "../blas/coma_iamax.h"
+#include "../blas/coma_asum.h"
 #include <math.h>
 /*
  * Dot Products
@@ -358,6 +359,57 @@ MunitResult test_izamax(const MunitParameter params[], void* user_data_or_fixtur
     return MUNIT_OK;
 }
 
+MunitResult test_sasum(const MunitParameter params[], void* user_data_or_fixture) {
+    unsigned int n = 6;
+    unsigned int n2 = 3;
+    float t1[6] = {1,-1,1,-1,-1,1.5};
+    float t2[3] = {-3,-2,-1};
+    float sum1  = sasum(n, (float *) &t1, 1);
+    float sum2  = sasum(n2, (float *) &t2, 1);
+    assert_float(sum1, ==, 6.5);
+    assert_float(sum2, ==, 6);
+
+    return MUNIT_OK;
+}
+
+MunitResult test_dasum(const MunitParameter params[], void* user_data_or_fixture) {
+    unsigned int n = 6;
+    unsigned int n2 = 3;
+    double t1[6] = {1,-1,1,-1,-1,1.5};
+    double t2[3] = {-3,-2,-1};
+    double sum1  = dasum(n, (double *) &t1, 1);
+    double sum2  = dasum(n2, (double *) &t2, 1);
+    assert_double_equal(sum1, 6.5, 8);
+    assert_double_equal(sum2, 6, 8);
+
+    return MUNIT_OK;
+}
+
+MunitResult test_scasum(const MunitParameter params[], void* user_data_or_fixture) {
+    unsigned int n = 6;
+    unsigned int n2 = 3;
+    complex float t1[6] = {1 + 2*I,-1 + 2*I,1 + 2*I,-1 + 2 * I,-1 + 2* I,1.5 + 2*I};
+    complex float t2[3] = {-3 + I,-2 + I,-1 + I};
+    float sum1  = scasum(n, (complex float *) &t1, 1);
+    float sum2  = scasum(n2, (complex float *) &t2, 1);
+    assert_double_equal(sum1, 13.680339887498949, 6);
+    assert_double_equal(sum2, 6.812559200041265, 6);
+
+    return MUNIT_OK;
+}
+
+MunitResult test_dzasum(const MunitParameter params[], void* user_data_or_fixture) {
+    unsigned int n = 6;
+    unsigned int n2 = 3;
+    complex double t1[6] = {1 + 2*I,-1 + 2*I,1 + 2*I,-1 + 2 * I,-1 + 2* I,1.5 + 2*I};
+    complex double t2[3] = {-3 + I,-2 + I,-1 + I};
+    double sum1  = dzasum(n, (complex double *) &t1, 1);
+    double sum2  = dzasum(n2, (complex double *) &t2, 1);
+    assert_double_equal(sum1, 13.680339887498949, 16);
+    assert_double_equal(sum2, 6.812559200041265, 16);
+    return MUNIT_OK;
+}
+
 
 static const MunitTest level1_tests[] = {
         {
@@ -513,6 +565,30 @@ static const MunitTest level1_tests[] = {
         {
                 (char*) "/amax/izamax",
                 test_izamax,
+                MUNIT_TEST_OPTION_NONE,
+                NULL
+        },
+        {
+                (char*) "/asum/sasum",
+                test_sasum,
+                MUNIT_TEST_OPTION_NONE,
+                NULL
+        },
+        {
+                (char*) "/asum/dasum",
+                test_dasum,
+                MUNIT_TEST_OPTION_NONE,
+                NULL
+        },
+        {
+                (char*) "/asum/scasum",
+                test_scasum,
+                MUNIT_TEST_OPTION_NONE,
+                NULL
+        },
+        {
+                (char*) "/asum/dzasum",
+                test_dzasum,
                 MUNIT_TEST_OPTION_NONE,
                 NULL
         },
