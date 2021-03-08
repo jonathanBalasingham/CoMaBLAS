@@ -201,6 +201,34 @@ MunitResult test_zscal(const MunitParameter params[], void* user_data_or_fixture
     return MUNIT_OK;
 }
 
+MunitResult test_csscal(const MunitParameter params[], void* user_data_or_fixture) {
+    unsigned int n = 6;
+    complex float t1[6] = {1+1*I,2+2*I,3+3*I,4+4*I,5+5*I,6+6*I};
+    const complex float t2[6] = {2+2*I,4+4*I,6+6*I,8+8*I,10+10*I,12+12*I};
+    float sa = 2;
+    csscal(n, sa, (complex float *) &t1, 1);
+
+    for (int i = 0; i < n; ++i) {
+        assert_float(t1[i], ==, t2[i]);
+    }
+
+    return MUNIT_OK;
+}
+
+MunitResult test_zdscal(const MunitParameter params[], void* user_data_or_fixture) {
+    unsigned int n = 6;
+    complex double t1[6] = {1+1*I,2+2*I,3+3*I,4+4*I,5+5*I,6+6*I};
+    const complex double t2[6] = {2+2*I,4+4*I,6+6*I,8+8*I,10+10*I,12+12*I};
+    double sa = 2;
+    zdscal(n, sa, (complex double *) &t1, 1);
+
+    for (int i = 0; i < n; ++i) {
+        assert_double_equal(t1[i], t2[i], 16);
+    }
+
+    return MUNIT_OK;
+}
+
 MunitResult test_saxpy(const MunitParameter params[], void* user_data_or_fixture) {
     unsigned int n = 6;
     float t1[6] = {1,2,3,4,5,6};
@@ -505,6 +533,18 @@ static const MunitTest level1_tests[] = {
         {
                 (char*) "/scal/zscal",
                 test_zscal,
+                MUNIT_TEST_OPTION_NONE,
+                NULL
+        },
+        {
+                (char*) "/scal/csscal",
+                test_csscal,
+                MUNIT_TEST_OPTION_NONE,
+                NULL
+        },
+        {
+                (char*) "/scal/zdscal",
+                test_zdscal,
                 MUNIT_TEST_OPTION_NONE,
                 NULL
         },
