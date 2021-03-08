@@ -333,6 +333,31 @@ MunitResult test_idamax(const MunitParameter params[], void* user_data_or_fixtur
     return MUNIT_OK;
 }
 
+MunitResult test_icamax(const MunitParameter params[], void* user_data_or_fixture) {
+    unsigned int n = 6;
+    unsigned int n2 = 2;
+    complex float t1[6] = {1+I,2+I,3+I,4+I,5+I,6+I};
+    complex float t2[3] = {3+I,2+I,1+I};
+    int ind  = icamax(n, (complex float *) &t1, 1);
+    int ind2  = icamax(n2, (complex float *) &t2, 1);
+    assert_int(ind, ==, 5);
+    assert_int(ind2, ==, 0);
+
+    return MUNIT_OK;
+}
+MunitResult test_izamax(const MunitParameter params[], void* user_data_or_fixture) {
+    unsigned int n = 6;
+    unsigned int n2 = 2;
+    complex double t1[6] = {1+I,2+I,3+I,4+I,5+I,6+I};
+    complex double t2[3] = {3+I,2+I,1+I};
+    int ind  = izamax(n, (complex double *) &t1, 1);
+    int ind2  = izamax(n2, (complex double *) &t2, 1);
+    assert_int(ind, ==, 5);
+    assert_int(ind2, ==, 0);
+
+    return MUNIT_OK;
+}
+
 
 static const MunitTest level1_tests[] = {
         {
@@ -476,6 +501,18 @@ static const MunitTest level1_tests[] = {
         {
                 (char*) "/amax/idamax",
                 test_idamax,
+                MUNIT_TEST_OPTION_NONE,
+                NULL
+        },
+        {
+                (char*) "/amax/icamax",
+                test_icamax,
+                MUNIT_TEST_OPTION_NONE,
+                NULL
+        },
+        {
+                (char*) "/amax/izamax",
+                test_izamax,
                 MUNIT_TEST_OPTION_NONE,
                 NULL
         },
