@@ -16,10 +16,8 @@ A pure C implementation of BLAS, based on the LAPACK Fortran implementation.
 - SDSDOT - dot product with extended precision accumulation
 - SNRM2 - Euclidean norm [TESTED]
 - SCNRM2- Euclidean norm [TESTED]
-- SASUM - sum of absolute values
+- SASUM - sum of absolute values [TESTED]
 - ISAMAX - index of max abs value [TESTED]
-
-
 
 - DROTG - setup Givens rotation
 - DROTMG - setup modified Givens rotation
@@ -33,5 +31,30 @@ A pure C implementation of BLAS, based on the LAPACK Fortran implementation.
 - DSDOT - dot product with extended precision accumulation
 - DNRM2 - Euclidean norm [TESTED]
 - DZNRM2 - Euclidean norm [TESTED]
-- DASUM - sum of absolute values
+- DASUM - sum of absolute values [TESTED]
 - IDAMAX - index of max abs value [TESTED]
+
+- CROTG - setup Givens rotation
+- CSROT - apply Givens rotation
+- CSWAP - swap x and y [TESTED]
+- CSCAL - x = a*x [TESTED]
+- CSSCAL - x = a*x [TESTED]
+- CCOPY - copy x into y [TESTED]
+- CAXPY - y = a*x + y
+- CDOTU - dot product
+- CDOTC - dot product, conjugating the first vector
+- SCASUM - sum of absolute values [TESTED]
+- ICAMAX - index of max abs value [TESTED]
+
+- ZROTG - setup Givens rotation
+- ZDROTF - apply Givens rotation
+- ZSWAP - swap x and y [TESTED]
+- ZSCAL - x = a*x [TESTED]
+- ZDSCAL - x = a*x [TESTED]
+- ZCOPY - copy x into y [TESTED]
+- ZAXPY - y = a*x + y
+- ZDOTU - dot product
+- ZDOTC - dot product, conjugating the first vector
+- DZASUM - sum of absolute values [TESTED]
+- IZAMAX - index of max abs value [TESTED]
+
