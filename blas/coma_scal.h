@@ -11,6 +11,8 @@ void sscal(unsigned int n, float sa, float* sx, int incx);
 void dscal(unsigned int n, double sa, double* sx, int incx);
 void cscal(int n, complex float sa,complex float* sx, int incx);
 void zscal(int n,complex double sa,complex double* sx, int incx);
+void csscal(int n, float sa,complex float* sx, int incx);
+void zdscal(int n, double sa,complex double* sx, int incx);
 
 
 

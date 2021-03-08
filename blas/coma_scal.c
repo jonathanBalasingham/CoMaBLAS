@@ -87,7 +87,39 @@ void cscal(int n, complex float sa, complex float *sx, int incx) {
     }
 }
 
+void csscal(int n, float sa, complex float *sx, int incx) {
+    if (n == 0)
+        return;
+
+    if (incx == 1){
+        for (int i = 0; i < n; ++i) {
+            sx[i] = sx[i] * sa;
+        }
+    } else {
+        int nincx = n * incx;
+        for (int i = 0; i < nincx; i += incx) {
+            sx[i] = sx[i] * sa;
+        }
+    }
+}
+
 void zscal(int n, complex double sa, complex double *sx, int incx) {
+    if (n == 0)
+        return;
+
+    if (incx == 1){
+        for (int i = 0; i < n; ++i) {
+            sx[i] = sx[i] * sa;
+        }
+    } else {
+        int nincx = n * incx;
+        for (int i = 0; i < nincx; i += incx) {
+            sx[i] = sx[i] * sa;
+        }
+    }
+}
+
+void zdscal(int n, double sa, complex double *sx, int incx) {
     if (n == 0)
         return;
 
