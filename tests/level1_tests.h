@@ -260,6 +260,39 @@ MunitResult test_daxpy(const MunitParameter params[], void* user_data_or_fixture
     return MUNIT_OK;
 }
 
+MunitResult test_caxpy(const MunitParameter params[], void* user_data_or_fixture) {
+    unsigned int n = 3;
+    complex float t1[3] = {1 + I, 2 + I, 3 + I};
+    complex float t2[3] = {1 + I, 1 + I, 1 + I};
+    complex float t3[3] = {2+4*I, 4 + 5*I, 6 + 6*I};
+
+    complex float sa = 2 + I;
+    caxpy(n, sa, (complex float *) &t1, 1, (complex float *) &t2, 1);
+
+    for (int i = 0; i < n; ++i) {
+        assert_float(crealf(t2[i]), ==, crealf(t3[i]));
+        assert_float(cimagf(t2[i]), ==, cimagf(t3[i]));
+    }
+
+    return MUNIT_OK;
+}
+
+MunitResult test_zaxpy(const MunitParameter params[], void* user_data_or_fixture) {
+    unsigned int n = 3;
+    complex double t1[3] = {1 + I, 2 + I, 3 + I};
+    complex double t2[3] = {1 + I, 1 + I, 1 + I};
+    complex double t3[3] = {2+4*I, 4 + 5*I, 6 + 6*I};
+
+    complex double sa = 2 + I;
+    zaxpy(n, sa, (complex double *) &t1, 1, (complex double *) &t2, 1);
+
+    for (int i = 0; i < n; ++i) {
+        assert_double_equal(t2[i], t3[i], 16);
+    }
+
+    return MUNIT_OK;
+}
+
 MunitResult test_sswap(const MunitParameter params[], void* user_data_or_fixture) {
     unsigned int n = 6;
     float t1[6] = {1,2,3,4,5,6};
@@ -557,6 +590,18 @@ static const MunitTest level1_tests[] = {
         {
                 (char*) "/axpy/daxpy",
                 test_daxpy,
+                MUNIT_TEST_OPTION_NONE,
+                NULL
+        },
+        {
+                (char*) "/axpy/caxpy",
+                test_caxpy,
+                MUNIT_TEST_OPTION_NONE,
+                NULL
+        },
+        {
+                (char*) "/axpy/zaxpy",
+                test_zaxpy,
                 MUNIT_TEST_OPTION_NONE,
                 NULL
         },
