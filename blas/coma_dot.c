@@ -150,3 +150,63 @@ complex double zdotu(unsigned int n, const complex double *zx, int incx, const c
     dotu = temp;
     return dotu;
 }
+
+complex float cdotc(unsigned int n, const complex float *cx, int incx, const complex float *cy, int incy) {
+    complex float temp, dotu;
+    int ix, iy;
+
+    temp = 0.0 + 0.0i, dotu = 0.0 + 0.0i;
+    if (n == 0)
+        return dotu;
+
+    if (incx == 1 && incy == 1){
+        for (int i = 0; i < n; ++i) {
+            temp += conjf(cx[i]) * cy[i];
+        }
+    } else {
+        ix = 0, iy = 0;
+        if (incx < 0)
+            ix = (-1*n+1) * incx;
+        if (incy < 0)
+            iy = (-1*n+1) * incy;
+
+        for (int j = 0; j < n; ++j) {
+            temp += conjf(cx[ix]) * cy[iy];
+            ix += incx;
+            iy += incy;
+        }
+    }
+
+    dotu = temp;
+    return dotu;
+}
+
+complex double zdotc(unsigned int n, const complex double *zx, int incx, const complex double *zy, int incy) {
+    complex double temp, dotu;
+    int ix, iy;
+
+    temp = 0.0 + 0.0i, dotu = 0.0 + 0.0i;
+    if (n == 0)
+        return dotu;
+
+    if (incx == 1 && incy == 1){
+        for (int i = 0; i < n; ++i) {
+            temp += conj(zx[i]) * zy[i];
+        }
+    } else {
+        ix = 0, iy = 0;
+        if (incx < 0)
+            ix = (-1*n+1) * incx;
+        if (incy < 0)
+            iy = (-1*n+1) * incy;
+
+        for (int j = 0; j < n; ++j) {
+            temp += conj(zx[ix]) * zy[iy];
+            ix += incx;
+            iy += incy;
+        }
+    }
+
+    dotu = temp;
+    return dotu;
+}
