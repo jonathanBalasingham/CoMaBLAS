@@ -40,7 +40,7 @@ A pure C implementation of BLAS, based on the LAPACK Fortran implementation.
 - CSCAL - x = a*x [TESTED]
 - CSSCAL - x = a*x [TESTED]
 - CCOPY - copy x into y [TESTED]
-- CAXPY - y = a*x + y
+- CAXPY - y = a*x + y [TESTED]
 - CDOTU - dot product
 - CDOTC - dot product, conjugating the first vector
 - SCASUM - sum of absolute values [TESTED]
@@ -52,7 +52,7 @@ A pure C implementation of BLAS, based on the LAPACK Fortran implementation.
 - ZSCAL - x = a*x [TESTED]
 - ZDSCAL - x = a*x [TESTED]
 - ZCOPY - copy x into y [TESTED]
-- ZAXPY - y = a*x + y
+- ZAXPY - y = a*x + y [TESTED]
 - ZDOTU - dot product
 - ZDOTC - dot product, conjugating the first vector
 - DZASUM - sum of absolute values [TESTED]
