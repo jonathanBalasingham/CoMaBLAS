@@ -75,12 +75,12 @@ void daxpy(unsigned int n, double a, const double *x, int incx, double *y, int i
     }
 }
 
-void caxpy(unsigned int n, float _Complex a, const float _Complex *x, int incx, float _Complex *y, int incy) {
+void caxpy(unsigned int n, complex float a, const complex float *x, int incx, complex float *y, int incy) {
     if (n == 0 || cabsf(a) == 0)
         return;
 
     if (incx == 1 && incy == 1) {
-        for (int i = 0; i < n; i += 4) {
+        for (int i = 0; i < n; ++i) {
             y[i] = y[i] + a * x[i];
         }
     } else {
@@ -98,12 +98,12 @@ void caxpy(unsigned int n, float _Complex a, const float _Complex *x, int incx, 
     }
 }
 
-void zaxpy(unsigned int n, double _Complex a, const double _Complex *x, int incx, double _Complex *y, int incy) {
+void zaxpy(unsigned int n, complex double a, const complex double *x, int incx, complex double *y, int incy) {
     if (n == 0 || cabs(a) == 0)
         return;
 
     if (incx == 1 && incy == 1) {
-        for (int i = 0; i < n; i += 4) {
+        for (int i = 0; i < n; ++i) {
             y[i] = y[i] + a * x[i];
         }
     } else {
