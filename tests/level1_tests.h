@@ -55,6 +55,26 @@ MunitResult ddot_over5(const MunitParameter params[], void* user_data_or_fixture
     return MUNIT_OK;
 }
 
+MunitResult test_cdotu(const MunitParameter params[], void* user_data_or_fixture) {
+    int n = 4;
+    complex float t1[4] = {1+I, 1-I, -1+I, -1-I};
+    complex float t2[4] = {3-4*I, 6-2*I, 1+2*I, 4+3*I};
+
+    complex float answer = cdotu(n, (complex float  *) &t1, 1, (complex float *) &t2, 1);
+    munit_assert_double_equal(7 - 17*I, answer, 6);
+    return MUNIT_OK;
+}
+
+MunitResult test_zdotu(const MunitParameter params[], void* user_data_or_fixture) {
+    int n = 4;
+    complex double t1[4] = {1+I, 1-I, -1+I, -1-I};
+    complex double t2[4] = {3-4*I, 6-2*I, 1+2*I, 4+3*I};
+
+    complex double answer = zdotu(n, (complex double *) &t1, 1, (complex double *) &t2, 1);
+    munit_assert_double_equal(7-17*I, answer, 15);
+    return MUNIT_OK;
+}
+
 /*
  * Euclidean Norm
  */
@@ -494,6 +514,18 @@ static const MunitTest level1_tests[] = {
         {
                 (char*) "/dot/ddot2",
                 ddot_under5,
+                MUNIT_TEST_OPTION_NONE,
+                NULL
+        },
+        {
+                (char*) "/dot/cdotu",
+                test_cdotu,
+                MUNIT_TEST_OPTION_NONE,
+                NULL
+        },
+        {
+                (char*) "/dot/zdotu",
+                test_zdotu,
                 MUNIT_TEST_OPTION_NONE,
                 NULL
         },
