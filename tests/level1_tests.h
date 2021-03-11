@@ -11,6 +11,7 @@
 #include "../blas/coma_swap.h"
 #include "../blas/coma_iamax.h"
 #include "../blas/coma_asum.h"
+#include "../blas/coma_dsdot.h"
 #include <math.h>
 /*
  * Dot Products
@@ -92,6 +93,27 @@ MunitResult test_zdotc(const MunitParameter params[], void* user_data_or_fixture
 
     complex double answer = zdotc(n, (complex double *) &t1, 1, (complex double *) &t2, 1);
     munit_assert_double_equal(1-5*I, answer, 15);
+    return MUNIT_OK;
+}
+
+MunitResult test_sdsdot(const MunitParameter params[], void* user_data_or_fixture) {
+    float t3[7] = {1,1,1,1,1,1,1};
+    float t4[7] = {1,1,1,1,1,1,1};
+    int n2 = 7;
+
+    double answer = sdsdot(n2, 0, (float *) &t3, 1, (float *) &t4, 1);
+    munit_assert_double_equal(7.0, answer, 15);
+    return MUNIT_OK;
+}
+
+// TODO: precision might be wrong if only zeros after decimal
+MunitResult test_dsdot(const MunitParameter params[], void* user_data_or_fixture) {
+    double t3[7] = {1,1,1,1,1,1,1};
+    double t4[7] = {1,1,1,1,1,1,1};
+    int n2 = 7;
+
+    long double answer = dsdot(n2, (double *) &t3, 1, (double *) &t4, 1);
+    munit_assert_double_equal(7.0, answer, 30);
     return MUNIT_OK;
 }
 
@@ -558,6 +580,18 @@ static const MunitTest level1_tests[] = {
         {
                 (char*) "/dot/zdotc",
                 test_zdotc,
+                MUNIT_TEST_OPTION_NONE,
+                NULL
+        },
+        {
+                (char*) "/dot/sdsdot",
+                test_sdsdot,
+                MUNIT_TEST_OPTION_NONE,
+                NULL
+        },
+        {
+                (char*) "/dot/dsdot",
+                test_dsdot,
                 MUNIT_TEST_OPTION_NONE,
                 NULL
         },
