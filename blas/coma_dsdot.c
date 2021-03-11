@@ -31,15 +31,15 @@ double sdsdot(unsigned int n, float b, float *x, int incx, float *y, int incy) {
     return dsdot;
 }
 
-double dsdot(unsigned int n, double *x, int incx, double *y, int incy) {
-    double dsdot = 0;
+long double dsdot(unsigned int n, double *x, int incx, double *y, int incy) {
+    long double dsdot = 0;
     if (n == 0)
         return dsdot;
 
     if (incx == incy && incx > 0) {
         int ns = n * incx;
         for (int i = 0; i < ns; i+=incx) {
-            dsdot += (double) x[i] * (double) y[i];
+            dsdot += (long double) x[i] * (long double) y[i];
         }
     } else {
         int ix = 0, iy = 0;
@@ -49,7 +49,7 @@ double dsdot(unsigned int n, double *x, int incx, double *y, int incy) {
             iy = (-1*n+1) * incy;
 
         for (int j = 0; j < n; ++j) {
-            dsdot += (double) x[ix] * (double) y[iy];
+            dsdot += (long double) x[ix] * (long double) y[iy];
             ix += incx;
             iy += incy;
         }
