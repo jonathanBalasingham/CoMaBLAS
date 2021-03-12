@@ -4,31 +4,31 @@ A pure C implementation of BLAS, based on the LAPACK Fortran implementation.
 ## Development 
 
 ### Level 1
-- SROTG - setup Givens rotation
-- SROTMG - setup modified Givens rotation
-- SROT - apply Givens rotation
-- SROTM - apply modified Givens rotation
+- SROTG - setup Givens rotation [IMPLEMENTED]
+- SROTMG - setup modified Givens rotation [IMPLEMENTED]
+- SROT - apply Givens rotation [IMPLEMENTED]
+- SROTM - apply modified Givens rotation [IMPLEMENTED]
 - SSWAP - swap x and y [TESTED]
 - SSCAL - x = a*x [TESTED]
 - SCOPY - copy x into y [TESTED]
 - SAXPY - y = a*x + y [TESTED]
 - SDOT - dot product [TESTED]
-- SDSDOT - dot product with extended precision accumulation
+- SDSDOT - dot product with extended precision accumulation [TESTED]
 - SNRM2 - Euclidean norm [TESTED]
 - SCNRM2- Euclidean norm [TESTED]
 - SASUM - sum of absolute values [TESTED]
 - ISAMAX - index of max abs value [TESTED]
 
-- DROTG - setup Givens rotation
-- DROTMG - setup modified Givens rotation
-- DROT - apply Givens rotation
-- DROTM - apply modified Givens rotation
+- DROTG - setup Givens rotation [IMPLEMENTED]
+- DROTMG - setup modified Givens rotation [IMPLEMENTED]
+- DROT - apply Givens rotation [IMPLEMENTED]
+- DROTM - apply modified Givens rotation [IMPLEMENTED]
 - DSWAP - swap x and y [TESTED]
 - DSCAL - x = a*x [TESTED]
 - DCOPY - copy x into y [TESTED]
 - DAXPY - y = a*x + y [TESTED]
 - DDOT - dot product [TESTED]
-- DSDOT - dot product with extended precision accumulation
+- DSDOT - dot product with extended precision accumulation [TESTED]
 - DNRM2 - Euclidean norm [TESTED]
 - DZNRM2 - Euclidean norm [TESTED]
 - DASUM - sum of absolute values [TESTED]
