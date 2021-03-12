@@ -64,7 +64,7 @@ void crotg(complex float *a, complex float *b, float *c, float *s) {
         *a = *b;
     } else {
         float scale = cabsf(*a) + cabsf(*b);
-        float norm = scale * sqrtf(pow((cabs(*a/scale)),2)+ pow(cabs(*b / scale),2));
+        float norm = scale * sqrtf(powf((cabsf(*a/scale)),2)+ powf(cabsf(*b / scale),2));
         complex float alpha = *a / cabsf(*a);
         *c = cabsf(*a) / norm;
         *s = alpha * conjf(*b) / norm;
