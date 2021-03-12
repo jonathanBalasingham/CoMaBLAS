@@ -34,8 +34,8 @@ A pure C implementation of BLAS, based on the LAPACK Fortran implementation.
 - DASUM - sum of absolute values [TESTED]
 - IDAMAX - index of max abs value [TESTED]
 
-- CROTG - setup Givens rotation
-- CSROT - apply Givens rotation
+- CROTG - setup Givens rotation [IMPLEMENTED]
+- CSROT - apply Givens rotation [IMPLEMENTED]
 - CSWAP - swap x and y [TESTED]
 - CSCAL - x = a*x [TESTED]
 - CSSCAL - x = a*x [TESTED]
@@ -46,8 +46,8 @@ A pure C implementation of BLAS, based on the LAPACK Fortran implementation.
 - SCASUM - sum of absolute values [TESTED]
 - ICAMAX - index of max abs value [TESTED]
 
-- ZROTG - setup Givens rotation
-- ZDROTF - apply Givens rotation
+- ZROTG - setup Givens rotation [IMPLEMENTED]
+- ZDROTF - apply Givens rotation [IMPLEMENTED]
 - ZSWAP - swap x and y [TESTED]
 - ZSCAL - x = a*x [TESTED]
 - ZDSCAL - x = a*x [TESTED]
