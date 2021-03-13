@@ -105,18 +105,25 @@ void sgemv(char trans, unsigned int m, unsigned int n, float alpha, float** A, i
             float temp;
             for (int i = 0; i < n; ++i) {
                 temp = 0;
-                if (noconj) {
-                    for (int j = 0; j < m; ++j) {
-                        temp += A[j][i] * x[j];
-                    }
-                } else {
-                    for (int j = 0; j < m; ++j) {
-                        temp += conjg(A[j][i]) * x[j];
-                    }
+                for (int j = 0; j < m; ++j) {
+                    temp += A[j][i] * x[j];
                 }
+                y[jy] += alpha * temp;
+                jy += incy;
             }
         } else {
-
+            float temp;
+            unsigned int ix;
+            for (int i = 0; i < n; ++i) {
+                temp = 0;
+                ix = kx;
+                for (int j = 0; j < m; ++j) {
+                    temp += A[j][i] * x[ix];
+                    ix += incx;
+                }
+                y[jy] += alpha * temp;
+                jy += incy;
+            }
         }
     }
 }
