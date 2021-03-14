@@ -137,17 +137,7 @@ void sgemv(char trans, int m, int n, float alpha, float** A, int lda, float *x, 
 void dgemv(char trans, int m, int n, double alpha, double **A, int lda, double *x, int incx,
            double beta, double *y, int incy) {
 
-    int info = 0;
-    trans = (char) toupper(trans);
-
-    if (trans != 'N' && trans != 'T' && trans != 'C')
-        info = 1;
-    else if (lda < 1)
-        info = 6;
-    else if (incx == 0)
-        info = 8;
-    else if (incy == 0)
-        info = 11;
+    int info = _validate_inputs((char)toupper(trans), m,n,lda,incx,incy);
 
     if (info != 0){
         // throw error
@@ -258,17 +248,7 @@ void
 cgemv(char trans, int m, int n, complex float alpha, complex float **A, int lda, complex float *x,
       int incx, complex float beta, complex float *y, int incy) {
 
-    int info = 0;
-    trans = (char) toupper(trans);
-
-    if (trans != 'N' && trans != 'T' && trans != 'C')
-        info = 1;
-    else if (lda < 1)
-        info = 6;
-    else if (incx == 0)
-        info = 8;
-    else if (incy == 0)
-        info = 11;
+    int info = _validate_inputs((char)toupper(trans), m,n,lda,incx,incy);
 
     if (info != 0){
         // throw error
@@ -396,22 +376,7 @@ void
 zgemv(char trans, int m, int n, complex double alpha, complex double **A, int lda, complex double *x,
       int incx, complex double beta, complex double *y, int incy) {
 
-    int info = 0;
-    trans = (char) toupper(trans);
-
-    if (trans != 'N' && trans != 'T' && trans != 'C')
-        info = 1;
-    else if (lda < 1)
-        info = 6;
-    else if (incx == 0)
-        info = 8;
-    else if (incy == 0)
-        info = 11;
-
-    if (info != 0){
-        // throw error
-        return;
-    }
+    int info = _validate_inputs((char)toupper(trans), m,n,lda,incx,incy);
 
     int lenx, leny, kx, ky;
     if (trans == 'N') {
