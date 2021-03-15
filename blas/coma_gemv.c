@@ -6,7 +6,7 @@
 #include "coma_gemv.h"
 #include <stdbool.h>
 
-int _validate_inputs(char trans, int n, int m, int lda, int incx, int incy) {
+int _validate_gemv_inputs(char trans, int n, int m, int lda, int incx, int incy) {
     int info = 0;
     if (trans != 'N' && trans != 'T' && trans != 'C')
         info = 1;
@@ -27,7 +27,7 @@ int _validate_inputs(char trans, int n, int m, int lda, int incx, int incy) {
 void sgemv(char trans, int m, int n, float alpha, float** A, int lda, float *x, int incx,
            float beta, float *y, int incy) {
 
-    int info = _validate_inputs((char)toupper(trans), m,n,lda,incx,incy);
+    int info = _validate_gemv_inputs((char)toupper(trans), m,n,lda,incx,incy);
 
     if (info != 0){
         // throw error
@@ -137,7 +137,7 @@ void sgemv(char trans, int m, int n, float alpha, float** A, int lda, float *x, 
 void dgemv(char trans, int m, int n, double alpha, double **A, int lda, double *x, int incx,
            double beta, double *y, int incy) {
 
-    int info = _validate_inputs((char)toupper(trans), m,n,lda,incx,incy);
+    int info = _validate_gemv_inputs((char)toupper(trans), m,n,lda,incx,incy);
 
     if (info != 0){
         // throw error
@@ -248,7 +248,7 @@ void
 cgemv(char trans, int m, int n, complex float alpha, complex float **A, int lda, complex float *x,
       int incx, complex float beta, complex float *y, int incy) {
 
-    int info = _validate_inputs((char)toupper(trans), m,n,lda,incx,incy);
+    int info = _validate_gemv_inputs((char)toupper(trans), m,n,lda,incx,incy);
 
     if (info != 0){
         // throw error
@@ -376,7 +376,7 @@ void
 zgemv(char trans, int m, int n, complex double alpha, complex double **A, int lda, complex double *x,
       int incx, complex double beta, complex double *y, int incy) {
 
-    int info = _validate_inputs((char)toupper(trans), m,n,lda,incx,incy);
+    int info = _validate_gemv_inputs((char)toupper(trans), m,n,lda,incx,incy);
 
     int lenx, leny, kx, ky;
     if (trans == 'N') {
