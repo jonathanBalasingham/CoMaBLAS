@@ -94,21 +94,69 @@ sgbmv(char trans, int m, int n, int kl, int ku, float alpha, float **A, int lda,
 
     int kup1 = ku + 1;
     float temp;
+    int k, start, stop;
     if (trans == 'N') {
         int jx = kx;
         if (incy == 1) {
             for (int i = 0; i < n; ++i) {
                 temp = alpha * x[jx];
                 k = kup1 - i;
-                for (int j = max(0, i - ku); j < min(m, i + kl); ++j) {
-
+                start = 0 > i - ku ? 0 : i - ku;
+                stop = m < i + kl ? m : i + kl;
+                for (int j = start; j < stop; ++j) {
+                    y[j] += temp * A[k+j][i];
                 }
+                jx += incx;
             }
         } else {
-
+            int iy;
+            for (int i = 0; i < n; ++i) {
+                temp = alpha * x[jx];
+                iy = ky;
+                k = kup1 - i;
+                start = 0 > i - ku ? 0 : i - ku;
+                stop = m < i + kl ? m : i + kl;
+                for (int j = start; j < stop; ++j) {
+                    y[iy] += temp * A[k+j][i];
+                    iy += incy;
+                }
+                jx += incx;
+                if (i > ku)
+                    ky += incy;
+            }
         }
     } else {
-
+        int jy = ky;
+        if (incx == 1) {
+            for (int i = 0; i < n; ++i) {
+                temp = 0;
+                k = kup1 - i;
+                start = 0 > i - ku ? 0 : i - ku;
+                stop = m < i + kl ? m : i + kl;
+                for (int j = start; j < stop; ++j) {
+                    temp += A[k+j][i]*x[j];
+                }
+                y[jy] += alpha * temp;
+                jy += incy;
+            }
+        } else {
+            int ix;
+            for (int i = 0; i < n; ++i) {
+                temp = 0;
+                ix = kx;
+                k = kup1 - i;
+                start = 0 > i - ku ? 0 : i - ku;
+                stop = m < i + kl ? m : i + kl;
+                for (int j = start; j < stop; ++j) {
+                    temp += A[k+j][i] * x[ix];
+                    ix += incx;
+                }
+                y[jy] += alpha * temp;
+                jy += incy;
+                if (i > ku)
+                    kx += incx;
+            }
+        }
     }
 
 }
