@@ -89,7 +89,7 @@ A pure C implementation of BLAS, based on the LAPACK Fortran implementation.
 - DSYR2 - performs the symmetric rank 2 operation, A := alpha*x*y' + alpha*y*x' + A
 - DSPR2 - performs the symmetric packed rank 2 operation, A := alpha*x*y' + alpha*y*x' + A
 - CGEMV - matrix vector multiply [IMPLEMENTED]
-- CGBMV - banded matrix vector multiply
+- CGBMV - banded matrix vector multiply [IMPLEMENTED]
 - CHEMV - hermitian matrix vector multiply
 - CHBMV - hermitian banded matrix vector multiply
 - CHPMV - hermitian packed matrix vector multiply
@@ -106,7 +106,7 @@ A pure C implementation of BLAS, based on the LAPACK Fortran implementation.
 - CHER2 - hermitian rank 2 operation
 - CHPR2 - hermitian packed rank 2 operation
 - ZGEMV - matrix vector multiply [IMPLEMENTED]
-- ZGBMV - banded matrix vector multiply
+- ZGBMV - banded matrix vector multiply [IMPLEMENTED]
 - ZHEMV - hermitian matrix vector multiply
 - ZHBMV - hermitian banded matrix vector multiply
 - ZHPMV - hermitian packed matrix vector multiply
