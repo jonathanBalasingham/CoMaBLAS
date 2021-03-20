@@ -20,7 +20,7 @@ int _validate_symv_inputs(char uplo, int n, int lda, int incx, int incy){
     return 0;
 }
 
-void ssymv(char uplo, int n, float alpha, float **A, int lda, int incx, float beta, float *y, int incy) {
+void ssymv(char uplo, int n, float alpha, float **A, int lda, float*x, int incx, float beta, float *y, int incy) {
     int info = _validate_symv_inputs(uplo, n, lda, incx, incy);
     if (info != 0)
         return;
@@ -70,9 +70,69 @@ void ssymv(char uplo, int n, float alpha, float **A, int lda, int incx, float be
         return;
 
     if (toupper(uplo) == 'U') {
-
+        float temp1, temp2;
+        if (incx == 1 && incy == 1) {
+            for (int i = 0; i < n; ++i) {
+                temp1 = alpha * x[i];
+                temp2 = 0;
+                for (int j = 0; j < i - 1; ++j) {
+                    y[j] += temp1 * A[j][i];
+                    temp2 += A[j][i] * x[j];
+                }
+                y[i] += temp1 * A[i][i] + alpha * temp2;
+            }
+        } else {
+            int jx = kx;
+            int jy = ky;
+            int ix, iy;
+            for (int i = 0; i < n; ++i) {
+                temp1 = alpha * x[i];
+                temp2 = 0;
+                ix = kx;
+                iy = ky;
+                for (int j = 0; j < i - 1; ++j) {
+                    y[iy] += temp1 * A[j][i];
+                    temp2 += A[j][i] * x[j];
+                    ix += incx;
+                    iy += incy;
+                }
+                y[jy] += temp1 * A[i][i] + alpha * temp2;
+                jx += incx;
+                jy += incy;
+            }
+        }
     } else {
-
+        float temp1, temp2;
+        if (incx == 1 && incy == 1) {
+            for (int i = 0; i < n; ++i) {
+                temp1 = alpha * x[i];
+                temp2 = 0;
+                for (int j = i + 1; j < n; ++j) {
+                    y[j] += temp1 * A[j][i];
+                    temp2 += A[j][i] * x[j];
+                }
+                y[i] += alpha * temp2;
+            }
+        } else {
+            int jx = kx;
+            int jy = ky;
+            int ix, iy;
+            for (int i = 0; i < n; ++i) {
+                temp1 = alpha * x[i];
+                temp2 = 0;
+                ix = kx;
+                iy = ky;
+                for (int j = i + 1; j < n; ++j) {
+                    y[iy] += temp1 * A[j][i];
+                    temp2 += A[j][i] * x[j];
+                    ix += incx;
+                    iy += incy;
+                }
+                y[jy] += alpha * temp2;
+                jx += incx;
+                jy += incy;
+            }
+        }
     }
 
 }
