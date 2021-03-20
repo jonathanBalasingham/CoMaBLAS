@@ -58,7 +58,7 @@ A pure C implementation of BLAS, based on the LAPACK Fortran implementation.
 ### Level 2
 - SGEMV - matrix vector multiply [IMPLEMENTED]
 - SGBMV - banded matrix vector multiply [IMPLEMENTED]
-- SSYMV - symmetric matrix vector multiply
+- SSYMV - symmetric matrix vector multiply [IMPLEMENTED]
 - SSBMV - symmetric banded matrix vector multiply
 - SSPMV - symmetric packed matrix vector multiply
 - STRMV - triangular matrix vector multiply
