@@ -74,7 +74,7 @@ A pure C implementation of BLAS, based on the LAPACK Fortran implementation.
 - SSPR2 - performs the symmetric packed rank 2 operation, A := alpha*x*y' + alpha*y*x' + A
 - DGEMV - matrix vector multiply [IMPLEMENTED]
 - DGBMV - banded matrix vector multiply [IMPLEMENTED]
-- DSYMV - symmetric matrix vector multiply
+- DSYMV - symmetric matrix vector multiply [IMPLEMENTED]
 - DSBMV - symmetric banded matrix vector multiply
 - DSPMV - symmetric packed matrix vector multiply
 - DTRMV - triangular matrix vector multiply
