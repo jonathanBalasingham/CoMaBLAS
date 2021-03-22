@@ -74,12 +74,80 @@ ssbmv(char uplo, int n, int k, float alpha, float **A, int lda, float *x, int in
     if (alpha == 0)
         return;
 
+    int l, jx, jy, ix, iy;
     if (uplo == 'U') {
         int kplus1 = k + 1;
         if (incx == 1 && incy == 1) {
-
+            float temp1, temp2;
+            for (int i = 0; i < n; ++i) {
+                temp1 = alpha * x[i];
+                temp2 = 0;
+                l = kplus1 - i;
+                for (int j = (1 > i-k ? 1 : i-k); j < i - 1; ++j) {
+                    y[j] += temp1 * A[l+j][i];
+                    temp2 += A[l+j][i] * x[j];
+                }
+                y[i] += temp1 * A[kplus1][i] + alpha * temp2;
+            }
+        } else {
+            jx = kx;
+            jy = ky;
+            float temp1, temp2;
+            for (int i = 0; i < n; ++i) {
+                temp1 = alpha * x[i];
+                temp2 = 0;
+                ix = kx;
+                iy = ky;
+                l = kplus1 - i;
+                for (int j = (1 > i-k ? 1 : i-k); j < i - 1; ++j) {
+                    y[iy] += temp1 * A[l+j][i];
+                    temp2 += A[l+j][i] * x[ix];
+                    ix += incx;
+                    ix += incy;
+                }
+                y[jy] += temp1 * A[kplus1][i] + alpha * temp2;
+                jy += incy;
+                jx += incx;
+                if (i > k) {
+                    kx += incx;
+                    ky += incy;
+                }
+            }
         }
     } else {
-
+        int kplus1 = k + 1;
+        if (incx == 1 && incy == 1) {
+            float temp1, temp2;
+            for (int i = 0; i < n; ++i) {
+                temp1 = alpha * x[i];
+                temp2 = 0;
+                l = 1 - i;
+                for (int j = i + 1; j < (n < i+k ? n : i+k); ++j) {
+                    y[j] += temp1 * A[l+j][i];
+                    temp2 += A[l+j][i] * x[j];
+                }
+                y[i] += alpha * temp2;
+            }
+        } else {
+            jx = kx;
+            jy = ky;
+            float temp1, temp2;
+            for (int i = 0; i < n; ++i) {
+                temp1 = alpha * x[i];
+                temp2 = 0;
+                ix = kx;
+                iy = ky;
+                l = 1 - i;
+                for (int j = i + 1; j < (n < i+k ? n : i+k); ++j) {
+                    ix += incx;
+                    ix += incy;
+                    y[iy] += temp1 * A[l+j][i];
+                    temp2 += A[l+j][i] * x[ix];
+                }
+                y[jy] += alpha * temp2;
+                jy += incy;
+                jx += incx;
+            }
+        }
     }
 }
