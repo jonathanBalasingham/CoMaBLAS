@@ -21,6 +21,7 @@ int _validate_symv_inputs(char uplo, int n, int lda, int incx, int incy){
 }
 
 void ssymv(char uplo, int n, float alpha, float **A, int lda, float*x, int incx, float beta, float *y, int incy) {
+    uplo = (char) toupper(uplo);
     int info = _validate_symv_inputs(uplo, n, lda, incx, incy);
     if (info != 0)
         return;
