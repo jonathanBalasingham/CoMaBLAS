@@ -75,7 +75,7 @@ A pure C implementation of BLAS, based on the LAPACK Fortran implementation.
 - DGEMV - matrix vector multiply [IMPLEMENTED]
 - DGBMV - banded matrix vector multiply [IMPLEMENTED]
 - DSYMV - symmetric matrix vector multiply [IMPLEMENTED]
-- DSBMV - symmetric banded matrix vector multiply
+- DSBMV - symmetric banded matrix vector multiply [IMPLEMENTED]
 - DSPMV - symmetric packed matrix vector multiply
 - DTRMV - triangular matrix vector multiply
 - DTBMV - triangular banded matrix vector multiply
