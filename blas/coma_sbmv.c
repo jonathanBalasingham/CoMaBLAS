@@ -246,7 +246,7 @@ void dsbmv(char uplo, int n, int k, double alpha, double **A, int lda, double *x
         }
     } else {
         if (incx == 1 && incy == 1) {
-            float temp1, temp2;
+            double temp1, temp2;
             for (int i = 0; i < n; ++i) {
                 temp1 = alpha * x[i];
                 temp2 = 0;
@@ -260,7 +260,7 @@ void dsbmv(char uplo, int n, int k, double alpha, double **A, int lda, double *x
         } else {
             jx = kx;
             jy = ky;
-            float temp1, temp2;
+            double temp1, temp2;
             for (int i = 0; i < n; ++i) {
                 temp1 = alpha * x[i];
                 temp2 = 0;
