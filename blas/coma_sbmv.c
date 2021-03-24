@@ -245,7 +245,6 @@ void dsbmv(char uplo, int n, int k, double alpha, double **A, int lda, double *x
             }
         }
     } else {
-        int kplus1 = k + 1;
         if (incx == 1 && incy == 1) {
             float temp1, temp2;
             for (int i = 0; i < n; ++i) {
