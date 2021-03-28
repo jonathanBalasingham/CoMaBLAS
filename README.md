@@ -77,7 +77,7 @@ A pure C implementation of BLAS, based on the LAPACK Fortran implementation.
 - DSYMV - symmetric matrix vector multiply [IMPLEMENTED]
 - DSBMV - symmetric banded matrix vector multiply [IMPLEMENTED]
 - DSPMV - symmetric packed matrix vector multiply [IMPLEMENTED]
-- DTRMV - triangular matrix vector multiply
+- DTRMV - triangular matrix vector multiply [IMPLEMENTED]
 - DTBMV - triangular banded matrix vector multiply
 - DTPMV - triangular packed matrix vector multiply
 - DTRSV - solving triangular matrix problems
