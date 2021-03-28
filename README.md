@@ -60,8 +60,8 @@ A pure C implementation of BLAS, based on the LAPACK Fortran implementation.
 - SGBMV - banded matrix vector multiply [IMPLEMENTED]
 - SSYMV - symmetric matrix vector multiply [IMPLEMENTED]
 - SSBMV - symmetric banded matrix vector multiply [IMPLEMENTED]
-- SSPMV - symmetric packed matrix vector multiply
-- STRMV - triangular matrix vector multiply
+- SSPMV - symmetric packed matrix vector multiply [IMPLEMENTED]
+- STRMV - triangular matrix vector multiply [IMPLEMENTED]
 - STBMV - triangular banded matrix vector multiply
 - STPMV - triangular packed matrix vector multiply
 - STRSV - solving triangular matrix problems
@@ -76,7 +76,7 @@ A pure C implementation of BLAS, based on the LAPACK Fortran implementation.
 - DGBMV - banded matrix vector multiply [IMPLEMENTED]
 - DSYMV - symmetric matrix vector multiply [IMPLEMENTED]
 - DSBMV - symmetric banded matrix vector multiply [IMPLEMENTED]
-- DSPMV - symmetric packed matrix vector multiply
+- DSPMV - symmetric packed matrix vector multiply [IMPLEMENTED]
 - DTRMV - triangular matrix vector multiply
 - DTBMV - triangular banded matrix vector multiply
 - DTPMV - triangular packed matrix vector multiply
