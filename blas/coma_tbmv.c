@@ -544,5 +544,197 @@ void ctbmv(char uplo, char trans, char diag, int n, int k, complex float **A, in
 }
 
 void ztbmv(char uplo, char trans, char diag, int n, int k, complex double **A, int lda, complex double *x, int incx) {
+    int info = _validate_tbmv_inputs(uplo, trans, diag, n, k, lda, incx);
+    if (info != 1)
+        return;
 
+    uplo = (char) toupper(uplo);
+    trans = (char) toupper(trans);
+    diag = (char) toupper(diag);
+
+    if (n == 0)
+        return;
+
+    int kx;
+    if (incx < 0)
+        kx = 1 - (n - 1) * incx;
+    else
+        kx = 1;
+
+    int kplus1, l, jx, ix;
+    complex double temp;
+    bool nounit = diag == 'N';
+    bool noconj = trans == 'T';
+
+    if (trans == 'N') {
+        if (uplo == 'U') {
+            kplus1 = k + 1;
+            if (incx == 1) {
+                for (int j = 0; j < n; ++j) {
+                    if (x[j] != 0) {
+                        temp = x[j];
+                        l = kplus1 - j;
+                        for (int i = (1 > j - k? 1 : j - k); i < j - 1; i++) {
+                            x[i] += temp * A[l + i][j];
+                        }
+                        if (nounit)
+                            x[j] *= A[kplus1][j];
+                    }
+                }
+            } else {
+                jx = kx;
+                for (int j = 0; j < n; ++j) {
+                    if (x[j] != 0) {
+                        temp = x[jx];
+                        ix = kx;
+                        l = kplus1 - j;
+                        for (int i = (1 > j - k? 1 : j - k); i < j - 1; i++) {
+                            x[ix] += temp * A[l + i][j];
+                            ix += incx;
+                        }
+                        if (nounit)
+                            x[jx] *= A[kplus1][j];
+                    }
+                    jx += incx;
+                    if (j > k)
+                        kx += incx;
+                }
+            }
+        } else {
+            if (incx == 1) {
+                for (int j = n - 1; j >= 0; --j) {
+                    if (x[j] != 0) {
+                        temp = x[j];
+                        l = 1 - j;
+                        for (int i = (n > j + k? n: j + k); i >= j + 1; --i) {
+                            x[i] += temp * A[l + i][j];
+                        }
+                        if (nounit)
+                            x[j] *= A[1][j];
+                    }
+                }
+            } else {
+                kx += (n-1) * incx;
+                jx = kx;
+                for (int j = n - 1; j >= 0; --j) {
+                    if (x[jx] != 0) {
+                        temp = x[jx];
+                        ix = kx;
+                        l = 1 - j;
+                        for (int i = (n > j + k? n : j + k); i >= j + 1; --i) {
+                            x[ix] += temp * A[l+i][j];
+                            ix -= incx;
+                        }
+                        if (nounit)
+                            x[jx] *= A[1][j];
+                    }
+                    jx -= incx;
+                    if ((n-j) >= k)
+                        kx -= incx;
+                }
+            }
+        }
+    } else {
+        if (uplo == 'U') {
+            kplus1 = k + 1;
+            if (incx == 1) {
+                for (int j = n - 1; j >= 0; --j) {
+                    if (x[j] != 0) {
+                        temp = x[j];
+                        l = kplus1 - j;
+                        if (noconj) {
+                            if (nounit)
+                                temp *= A[kplus1][j];
+                            for (int i = j - 1; i >= (1 > j-k? 1: j-k); i--) {
+                                temp += x[i] * A[l + i][j];
+                            }
+                        } else {
+                            if (nounit)
+                                temp *= conj(A[kplus1][j]);
+                            for (int i = j - 1; i >= (1 > j-k? 1: j-k); i--) {
+                                temp += x[i] * conj(A[l + i][j]);
+                            }
+                        }
+                        x[j] = temp;
+                    }
+                }
+            } else {
+                kx += (n-1) * incx;
+                jx = kx;
+                for (int j = n - 1; j >= 0; --j) {
+                    if (x[j] != 0) {
+                        temp = x[jx];
+                        kx -= incx;
+                        ix = kx;
+                        l = kplus1 - j;
+                        if (noconj) {
+                            if (nounit)
+                                temp *= A[kplus1][j];
+                            for (int i = j - 1; i >= (1 > j-k? 1: j-k); i--) {
+                                temp += x[ix] * A[l + i][j];
+                                ix -= incx;
+                            }
+                        } else {
+                            if (nounit)
+                                temp *= conj(A[kplus1][j]);
+                            for (int i = j - 1; i >= (1 > j-k? 1: j-k); i--) {
+                                temp += x[ix] * conj(A[l + i][j]);
+                                ix -= incx;
+                            }
+                        }
+                        x[jx] = temp;
+                        jx -= incx;
+                    }
+                }
+            }
+        } else {
+            if (incx == 1) {
+                for (int j = 0; j < n; ++j) {
+                    if (x[j] != 0) {
+                        temp = x[j];
+                        l = 1 - j;
+                        if (noconj) {
+                            if (nounit)
+                                temp *= A[1][j];
+                            for (int i = j + 1; i < (n < j-k? n: j-k); ++i) {
+                                temp += x[i] * A[l + i][j];
+                            }
+                        } else {
+                            if (nounit)
+                                temp *= conj(A[1][j]);
+                            for (int i = j + 1; i < (n < j-k? n: j-k); ++i) {
+                                temp += x[i] * conj(A[l + i][j]);
+                            }
+                        }
+                        x[j] = temp;
+                    }
+                }
+            } else {
+                jx = kx;
+                for (int j = 0; j < n; ++j) {
+                    temp = x[jx];
+                    kx += incx;
+                    ix = kx;
+                    l = 1 - j;
+                    if (noconj) {
+                        if (nounit)
+                            temp *= A[1][j];
+                        for (int i = j + 1; i < (n < j-k? n: j-k); ++i) {
+                            temp += x[ix] * A[l + i][j];
+                            ix += incx;
+                        }
+                    } else {
+                        if (nounit)
+                            temp *= conj(A[1][j]);
+                        for (int i = j + 1; i < (n < j-k? n: j-k); ++i) {
+                            temp += x[ix] * conj(A[l + i][j]);
+                            ix += incx;
+                        }
+                    }
+                    x[jx] = temp;
+                    jx += incx;
+                }
+            }
+        }
+    }
 }
