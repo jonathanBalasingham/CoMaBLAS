@@ -47,7 +47,7 @@ sgemm(char transa, char transb, int m, int n, int k, float alpha, float **A, int
     else
         nrowb = n;
 
-    int info = _validate_gemm_inputs(transa, transb, m, n, k, lda, ldb, ldc, nota, notb, nrowa, nrowa);
+    int info = _validate_gemm_inputs(transa, transb, m, n, k, lda, ldb, ldc, nota, notb, nrowa, nrowb);
     if (info != 0)
         return;
 
@@ -158,7 +158,7 @@ void dgemm(char transa, char transb, int m, int n, int k, double alpha, double *
     else
         nrowb = n;
 
-    int info = _validate_gemm_inputs(transa, transb, m, n, k, lda, ldb, ldc, nota, notb, nrowa, nrowa);
+    int info = _validate_gemm_inputs(transa, transb, m, n, k, lda, ldb, ldc, nota, notb, nrowa, nrowb);
     if (info != 0)
         return;
 
@@ -381,7 +381,7 @@ void zgemm(char transa, char transb, int m, int n, int k, complex double alpha, 
     else
         nrowb = n;
 
-    int info = _validate_gemm_inputs(transa, transb, m, n, k, lda, ldb, ldc, nota, notb, nrowa, nrowa);
+    int info = _validate_gemm_inputs(transa, transb, m, n, k, lda, ldb, ldc, nota, notb, nrowa, nrowb);
     if (info != 0)
         return;
 
